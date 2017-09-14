@@ -1,12 +1,12 @@
 #================================================
-m_int = 1234
-m_double = 12.34
-m_string = "Hello World !"
+import math
+#================================================
+m_sqrt = math.sqrt(5)
+m_pow = math.pow(5, 2)
 m_format = ""
 
-m_format += "m_int : " + str(m_int) + "\n"
-m_format += "m_double : " + str(m_double) + "\n"
-m_format += "m_string : " + m_string + "\n"
+m_format += "m_sqrt : " + str(m_sqrt) + "\n"
+m_format += "m_pow : " + str(m_pow) + "\n"
 
 print(m_format)
 #================================================
