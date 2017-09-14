@@ -61,9 +61,7 @@ Les Concepts Abordés sur la **Distribution d'Appliction Python** :
 * [Py2](https://github.com/gkesse/ReadyPython/tree/master/Py2 "Py2")  
 
 Les Concepts Abordés sur la **Bonnes Pratiques du Développeur Python** :  
-* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
-* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
-* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [PEP 20, The Zen of Python](https://github.com/gkesse/ReadyPython/tree/master/PEP_20 "PEP 20, The Zen of Python")  
 
 # Technologies
 
