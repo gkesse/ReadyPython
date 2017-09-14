@@ -15,9 +15,52 @@ Avec à la fois des compétences en Systèmes Embarqués et en Robotique.
 C'est une bibliothèque développée en Python et maintenu par 
 [Gerard KESSE](http://5.48.215.193:8855/presentation/ "Accédez à mon site web (ReadyDev)").
 
-Les concepts abordés :  
+Les concepts de base abordés :  
 * [Message](https://github.com/gkesse/ReadyPython/tree/master/Message "Message")  
 * [Variable](https://github.com/gkesse/ReadyPython/tree/master/Variable "Variable")  
+* [Clavier](https://github.com/gkesse/ReadyPython/tree/master/Clavier "Clavier")  
+* [Condition](https://github.com/gkesse/ReadyPython/tree/master/Condition "Condition")  
+* [Boucle](https://github.com/gkesse/ReadyPython/tree/master/Boucle "Boucle")  
+* [Fonction](https://github.com/gkesse/ReadyPython/tree/master/Fonction "Fonction")  
+* [Fonction Lambda](https://github.com/gkesse/ReadyPython/tree/master/Fonction_Lambda "Fonction Lambda")  
+* [Module](https://github.com/gkesse/ReadyPython/tree/master/Module "Module")  
+* [Espace de Nom](https://github.com/gkesse/ReadyPython/tree/master/Espace_Nom "Espace de Nom")  
+* [Package](https://github.com/gkesse/ReadyPython/tree/master/Package "Package")  
+* [Exception](https://github.com/gkesse/ReadyPython/tree/master/Exception "Exception")  
+
+Les concepts abordés sur les Objets Spéciaux :  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [Tuple](https://github.com/gkesse/ReadyPython/tree/master/Tuple "Tuple")  
+* [Dictionnaire](https://github.com/gkesse/ReadyPython/tree/master/Dictionnaire "Dictionnaire")  
+* [Fichier](https://github.com/gkesse/ReadyPython/tree/master/Fichier "Fichier")  
+* [Référence](https://github.com/gkesse/ReadyPython/tree/master/Reference "Référence")  
+
+Les concepts abordés sur la Programmation Orientée Objet :  
+* [Classe](https://github.com/gkesse/ReadyPython/tree/master/Classe "Classe")  
+* [Méthode Spéciale](https://github.com/gkesse/ReadyPython/tree/master/Methode_Speciale "Méthode Spéciale")  
+* [Héritage](https://github.com/gkesse/ReadyPython/tree/master/Heritage "Héritage")  
+* [Décorateur](https://github.com/gkesse/ReadyPython/tree/master/Decorateur "Décorateur")  
+* [Métaclasse](https://github.com/gkesse/ReadyPython/tree/master/Metaclasse "Métaclasse")  
+
+Les concepts abordés sur la Bibliothèque Standard :  
+* [Expression Régulière](https://github.com/gkesse/ReadyPython/tree/master/Expression_Reguliere "Expression Régulière")  
+* [Date](https://github.com/gkesse/ReadyPython/tree/master/Date "Date")  
+* [Programmation Système](https://github.com/gkesse/ReadyPython/tree/master/Programmation_Systeme "Programmation Système")  
+* [Mathématique](https://github.com/gkesse/ReadyPython/tree/master/Mathematique "Mathématique")  
+* [Mot de Passe](https://github.com/gkesse/ReadyPython/tree/master/Mot_Passe "Mot de Passe")  
+* [Réseau](https://github.com/gkesse/ReadyPython/tree/master/Reseau "Réseau")  
+* [Date](https://github.com/gkesse/ReadyPython/tree/master/Date "Date")  
+* [Date](https://github.com/gkesse/ReadyPython/tree/master/Date "Date")  
+
+Les concepts abordés sur les Interfaces Graphiques :  
+* [Tkinter](https://github.com/gkesse/ReadyPython/tree/master/Tkinter "Tkinter")  
+* [Widget](https://github.com/gkesse/ReadyPython/tree/master/Widget "Widget")  
+* [Commande](https://github.com/gkesse/ReadyPython/tree/master/Commande "Commande")  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
+* [Liste](https://github.com/gkesse/ReadyPython/tree/master/Liste "Liste")  
 
 # Technologies
 
