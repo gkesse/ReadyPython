@@ -15,7 +15,7 @@ Avec à la fois des compétences en Systèmes Embarqués et en Robotique.
 C'est une bibliothèque développée en Python et maintenu par 
 [Gerard KESSE](http://5.48.215.193:8855/presentation/ "Accédez à mon site web (ReadyDev)").
 
-Les Concepts de Base Abordés :  
+Les Concepts Abordés sur les Bases :  
 * [Message](https://github.com/gkesse/ReadyPython/tree/master/Message "Message")  
 * [Variable](https://github.com/gkesse/ReadyPython/tree/master/Variable "Variable")  
 * [Clavier](https://github.com/gkesse/ReadyPython/tree/master/Clavier "Clavier")  
