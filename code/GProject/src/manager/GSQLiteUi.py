@@ -116,7 +116,7 @@ class GSQLiteUi:
     def run_CONFIG_SHOW(self):
         print("")
         GSQLite.Instance().queryShow("""
-        select * from CONFIG_DATA
+        select * from CONFIG_PYTHON
         order by CONFIG_KEY
         """)
         self.G_STATE = "S_SAVE"

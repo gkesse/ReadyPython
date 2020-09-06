@@ -25,37 +25,33 @@ class GConfig:
         else : self.updateData(key)
     #================================================
     def loadData(self, key):
-        lSql = """
+        lValue = GSQLite.Instance().queryValue("""
         select CONFIG_VALUE from CONFIG_PYTHON 
         where CONFIG_KEY='{0}'
-        """.format(key)
-        lValue = GSQLite.Instance().queryValue(lSql)
+        """.format(key))
         self.setData(key, lValue)
     #================================================
     def checkData(self, key):
-        lSql = """
+        lCount = GSQLite.Instance().queryValue("""
         select count(*) from CONFIG_PYTHON 
         where CONFIG_KEY='{0}'
-        """.format(key)
-        lCount = GSQLite.Instance().queryValue(lSql)
+        """.format(key))
         return lCount
     #================================================
     def insertData(self, key):
         lValue = self.getData(key)
-        lSql = """
+        GSQLite.Instance().queryWrite("""
         insert into CONFIG_PYTHON (CONFIG_KEY, CONFIG_VALUE)
         values ('{0}', '{1}')
-        """.format(key, lValue)
-        GSQLite.Instance().queryWrite(lSql)
+        """.format(key, lValue))
     #================================================
     def updateData(self, key):
         lValue = self.getData(key)
-        lSql = """
+        GSQLite.Instance().queryWrite("""
         update CONFIG_PYTHON 
         set CONFIG_VALUE = '{1}'
         where CONFIG_KEY = '{0}'
-        """.format(key, lValue)
-        GSQLite.Instance().queryWrite(lSql)
+        """.format(key, lValue))
 #================================================
 from .GSQLite import GSQLite
 #================================================
