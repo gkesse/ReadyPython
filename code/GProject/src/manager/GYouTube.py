@@ -30,6 +30,7 @@ class GYouTube:
         self.G_STATE = "S_END"
     #================================================
     def run_INIT(self):
+        print("")
         print("PYTHON_YOUTUBE !!!")
         print("\t%-2s : %s" % ("-q", "quitter l'application"))
         print("\t%-2s : %s" % ("-i", "reinitialiser l'application"))
@@ -51,9 +52,7 @@ class GYouTube:
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "1" : 
-            self.G_STATE = "S_VIDEO_LOAD"
-            GConfig.Instance().setData("PYTHON_YOUTUBE_ID", lAnswer)
+        elif lAnswer == "1" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("PYTHON_YOUTUBE_ID", lAnswer)
     #================================================
     def run_VIDEO_LOAD(self):
         print("")

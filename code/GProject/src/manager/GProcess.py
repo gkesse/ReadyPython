@@ -41,9 +41,7 @@ class GProcess:
         lAnswer = input("PYTHON_ADMIN (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "1" : 
-            self.G_STATE = "S_YOUTUBE" 
-            GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
+        elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
         print("")
