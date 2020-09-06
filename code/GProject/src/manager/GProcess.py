@@ -15,27 +15,18 @@ class GProcess:
     def run(self):
         self.G_STATE = "S_INIT"
         while True:
-            if self.G_STATE == "S_ADMIN" : self.run_ADMIN()
-            elif self.G_STATE == "S_INIT" : self.run_INIT()
+            if self.G_STATE == "S_INIT" : self.run_INIT()
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
-            elif self.G_STATE == "S_SQLITE" : self.run_SQLITE()
+            elif self.G_STATE == "S_YOUTUBE" : self.run_YOUTUBE()
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
-            elif self.G_STATE == "S_QUIT" : self.run_QUIT()
             else : break
-    #================================================
-    def run_ADMIN(self):
-        print("run_ADMIN")
-        self.G_STATE = "S_END"
     #================================================
     def run_INIT(self):
         print("")
         print("PYTHON_ADMIN !!!")
         print("\t%-2s : %s" % ("-q", "quitter l'application"))
-        print("\t%-2s : %s" % ("-i", "reinitialiser l'application"))
-        print("\t%-2s : %s" % ("-a", "redemarrer l'application"))
-        print("\t%-2s : %s" % ("-v", "valider les configurations"))
         print("")
         self.G_STATE = "S_LOAD"
     #================================================
@@ -47,22 +38,17 @@ class GProcess:
     #================================================
     def run_CHOICE(self):
         lAnswer = input("PYTHON_ADMIN ? ")
-        print(lAnswer)
-        self.G_STATE = "S_SQLITE"
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE"
     #================================================
-    def run_SQLITE(self):
+    def run_YOUTUBE(self):
         print("")
-        print("run_SQLITE")
+        print("run_YOUTUBE")
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
-        self.G_STATE = "S_QUIT"
+        self.G_STATE = "S_END"
     #================================================
     def run_LOAD(self):
         self.G_STATE = "S_METHOD"
-    #================================================
-    def run_QUIT(self):
-        print("")
-        print("run_QUIT")
-        self.G_STATE = "S_END"
 #================================================
