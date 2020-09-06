@@ -27,7 +27,7 @@ class GConfig:
     def loadData(self, key):
         lSql = """
         select CONFIG_VALUE from CONFIG_DATA 
-        where CONFIG_KEY='%s'
+        where CONFIG_KEY='{0}'
         """.format(key)
         lValue = GSQLite.Instance().queryValue(lSql)
         self.setData(key, lValue)
@@ -35,7 +35,7 @@ class GConfig:
     def checkData(self, key):
         lSql = """
         select count(*) from CONFIG_DATA 
-        where CONFIG_KEY='%s'
+        where CONFIG_KEY='{0}'
         """.format(key)
         lCount = GSQLite.Instance().queryValue(lSql)
         return lCount
@@ -44,7 +44,7 @@ class GConfig:
         lValue = self.getData(key)
         lSql = """
         insert into CONFIG_DATA (CONFIG_KEY, CONFIG_VALUE)
-        values ('%s', '%s')
+        values ('{0}', '{0}')
         """.format(key, lValue)
         GSQLite.Instance().queryWrite(lSql)
     #================================================
@@ -52,9 +52,9 @@ class GConfig:
         lValue = self.getData(key)
         lSql = """
         update CONFIG_DATA 
-        set CONFIG_VALUE = '%s'
-        where CONFIG_KEY = '%s'
-        """.format(lValue, key)
+        set CONFIG_VALUE = '{1}'
+        where CONFIG_KEY = '{0}'
+        """.format(key, lValue)
         GSQLite.Instance().queryWrite(lSql)
 #================================================
 from .GSQLite import GSQLite
