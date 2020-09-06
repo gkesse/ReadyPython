@@ -83,11 +83,12 @@ class GSQLiteUi:
     #================================================
     def run_CONFIG_DELETE(self):
         print("")
-        GSQLite.Instance().queryCreate("""
+        lKey = GConfig.Instance().getData("G_KEY_NAME");
+        GSQLite.Instance().queryWrite("""
         delete from CONFIG_PYTHON
-        where CONFIG_KEY = {0}
-        """.format())
-        self.G_STATE = "S_SAVE"
+        where CONFIG_KEY = '{0}'
+        """.format(lKey))
+        self.G_STATE = "S_CONFIG_SHOW"
     #================================================
     def run_CONFIG_DROP(self):
         print("")
