@@ -56,10 +56,10 @@ class GSQLiteUi:
     #================================================
     def run_TABLES_SHOW(self):
         print("")
-        GSQLite.Instance().queryShow('''
+        GSQLite.Instance().queryShow("""
         select name from sqlite_master 
-        where type='table'")
-        ''')
+        where type='table'
+        """)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
