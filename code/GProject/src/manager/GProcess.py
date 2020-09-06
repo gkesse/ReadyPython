@@ -39,12 +39,12 @@ class GProcess:
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
-        lLast = GConfig.Instance().getData("PYTHON_ADMIN_ID")
+        lLast = GConfig.Instance().getData("G_ADMIN_ID")
         lAnswer = input("PYTHON_ADMIN (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
-        elif lAnswer == "2" : self.G_STATE = "S_SQLITE" ; GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
+        elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
+        elif lAnswer == "2" : self.G_STATE = "S_SQLITE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
         print("")
@@ -57,11 +57,11 @@ class GProcess:
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
-        GConfig.Instance().saveData("PYTHON_ADMIN_ID")
+        GConfig.Instance().saveData("G_ADMIN_ID")
         self.G_STATE = "S_END"
     #================================================
     def run_LOAD(self):
-        GConfig.Instance().loadData("PYTHON_ADMIN_ID")
+        GConfig.Instance().loadData("G_ADMIN_ID")
         self.G_STATE = "S_METHOD"
 #================================================
 from .GConfig import GConfig
