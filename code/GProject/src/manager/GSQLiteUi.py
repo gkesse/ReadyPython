@@ -19,7 +19,10 @@ class GSQLiteUi:
             elif self.G_STATE == "S_INIT" : self.run_INIT()
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
+            #
             elif self.G_STATE == "S_TABLES_SHOW" : self.run_TABLES_SHOW()
+            elif self.G_STATE == "S_CONFIG_DATA_SHOW" : self.run_CONFIG_DATA_SHOW()
+            #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             elif self.G_STATE == "S_QUIT" : self.run_QUIT()
@@ -41,7 +44,8 @@ class GSQLiteUi:
     #================================================
     def run_METHOD(self):
         print("PYTHON_SQLITE :")
-        print("\t%-2s : %s" % ("1", "S_TABLES_SHOW"))
+        print("\t%-2s : %s" % ("1", "afficher les tables CONFIG_O"))
+        print("\t%-2s : %s" % ("2", "afficher les donnees CONFIG_DATA"))
         print("")
         self.G_STATE = "S_CHOICE"
     #================================================
@@ -52,13 +56,23 @@ class GSQLiteUi:
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        #
         elif lAnswer == "1" : self.G_STATE = "S_TABLES_SHOW" ; GConfig.Instance().setData("PYTHON_SQLITE_ID", lAnswer)
+        elif lAnswer == "2" : self.G_STATE = "S_CONFIG_DATA_SHOW" ; GConfig.Instance().setData("PYTHON_SQLITE_ID", lAnswer)
     #================================================
     def run_TABLES_SHOW(self):
         print("")
         GSQLite.Instance().queryShow("""
         select name from sqlite_master 
         where type='table'
+        """)
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_CONFIG_DATA_SHOW(self):
+        print("")
+        GSQLite.Instance().queryShow("""
+        select * from CONFIG_DATA
+        order by CONFIG_KEY
         """)
         self.G_STATE = "S_SAVE"
     #================================================

@@ -18,4 +18,10 @@ class GConfig:
     #================================================
     def getData(self, key):
         return self.m_dataMap.get(key, "")
+    #================================================
+    def saveData(self, key):
+        lValue = self.m_dataMap[key]
+    #================================================
+    def checkData(self, key):
+        lValue = self.m_dataMap[key]
 #================================================

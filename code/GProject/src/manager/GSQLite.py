@@ -16,7 +16,14 @@ class GSQLite:
         return GSQLite.m_instance
     #================================================
     def test(self):
-        self.queryShow("SELECT name FROM sqlite_master WHERE type='table'")
+        self.queryShow("""
+        select name from sqlite_master 
+        where type='table'
+        """)
+        self.queryShow("""
+        select count(*) from CONFIG_DATA 
+        where CONFIG_KEY='G_TEST_PATH'
+        """)
         sys.exit()
     #================================================
     def queryWrite(self, sql):
