@@ -3,7 +3,7 @@ class GProcess:
     #================================================
     m_instance = None
     #================================================
-    def __init__(self):
+    def __init__(self): 
         pass
     #================================================
     @staticmethod 
@@ -37,13 +37,17 @@ class GProcess:
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
-        lAnswer = input("PYTHON_ADMIN ? ")
+        lLast = GConfig.Instance().getData("PYTHON_ADMIN_ID")
+        lAnswer = input("PYTHON_ADMIN (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE"
+        elif lAnswer == "1" : 
+            self.G_STATE = "S_YOUTUBE" 
+            GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
         print("")
-        GProcess.Instance().run()
+        GYouTube.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
@@ -51,4 +55,7 @@ class GProcess:
     #================================================
     def run_LOAD(self):
         self.G_STATE = "S_METHOD"
+#================================================
+from .GConfig import GConfig
+from .GYouTube import GYouTube
 #================================================
