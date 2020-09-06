@@ -1,0 +1,16 @@
+GSRC = ../code/GProject/src
+GBIN = bin
+GBUILD = build
+GTARGET = $(GBIN)/gp_python.exe
+   
+all: compile
+pip: pip_install
+
+compile: $(GSRC)/main.py
+	@python $(GSRC)/main.py
+pip_install: 
+	python -m pip install $(GARGS)
+exe: $(GSRC)/main.py
+	python -m PyInstaller $(GSRC)/main.py
+run: 
+	@$(GTARGET)
