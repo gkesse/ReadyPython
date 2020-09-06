@@ -20,8 +20,42 @@ class GConfig:
         return self.m_dataMap.get(key, "")
     #================================================
     def saveData(self, key):
-        lValue = self.m_dataMap[key]
+        lCheck = self.checkData(key)
+        if lCheck == 0 : self.insertData(key)
+        else : self.updateData(key)
+    #================================================
+    def loadData(self, key):
+        lSql = """
+        select CONFIG_VALUE from CONFIG_DATA 
+        where CONFIG_KEY='%s'
+        """.format(key)
+        lValue = GSQLite.Instance().queryValue(lSql)
+        self.setData(key, lValue)
     #================================================
     def checkData(self, key):
-        lValue = self.m_dataMap[key]
+        lSql = """
+        select count(*) from CONFIG_DATA 
+        where CONFIG_KEY='%s'
+        """.format(key)
+        lCount = GSQLite.Instance().queryValue(lSql)
+        return lCount
+    #================================================
+    def insertData(self, key):
+        lValue = self.getData(key)
+        lSql = """
+        insert into CONFIG_DATA (CONFIG_KEY, CONFIG_VALUE)
+        values ('%s', '%s')
+        """.format(key, lValue)
+        GSQLite.Instance().queryWrite(lSql)
+    #================================================
+    def updateData(self, key):
+        lValue = self.getData(key)
+        lSql = """
+        update CONFIG_DATA 
+        set CONFIG_VALUE = '%s'
+        where CONFIG_KEY = '%s'
+        """.format(lValue, key)
+        GSQLite.Instance().queryWrite(lSql)
+#================================================
+from .GSQLite import GSQLite
 #================================================

@@ -57,9 +57,11 @@ class GProcess:
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
+        GConfig.Instance().saveData("PYTHON_ADMIN_ID")
         self.G_STATE = "S_END"
     #================================================
     def run_LOAD(self):
+        GConfig.Instance().loadData("PYTHON_ADMIN_ID")
         self.G_STATE = "S_METHOD"
 #================================================
 from .GConfig import GConfig

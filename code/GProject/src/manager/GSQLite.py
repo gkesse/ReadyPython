@@ -20,19 +20,15 @@ class GSQLite:
         select name from sqlite_master 
         where type='table'
         """)
-        self.queryShow("""
-        select count(*) from CONFIG_DATA 
-        where CONFIG_KEY='G_TEST_PATH'
-        """)
         sys.exit()
     #================================================
-    def queryWrite(self, sql):
+    def queryCreate(self, sql):
         lSqliteF = GManager.Instance().getData("sqlite.file")
         lSqlite = sqlite3.connect(lSqliteF)
         lSqlite.execute(sql)
         lSqlite.close()
     #================================================
-    def queryInsert(self, sql):
+    def queryWrite(self, sql):
         lSqliteF = GManager.Instance().getData("sqlite.file")
         lSqlite = sqlite3.connect(lSqliteF)
         lSqlite.execute(sql)
@@ -46,6 +42,16 @@ class GSQLite:
         for lData in lDataMap :
             print(lData)
         lSqlite.close()
+    #================================================
+    def queryValue(self, sql):
+        lSqliteF = GManager.Instance().getData("sqlite.file")
+        lSqlite = sqlite3.connect(lSqliteF)
+        lDataMap = lSqlite.execute(sql)
+        lValue = ""
+        for lData in lDataMap :
+            lValue = lData[0]
+        lSqlite.close()
+        return lValue
 #================================================
 from .GManager import GManager
 #================================================
