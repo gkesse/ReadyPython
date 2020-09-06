@@ -44,7 +44,7 @@ class GConfig:
         lValue = self.getData(key)
         lSql = """
         insert into CONFIG_DATA (CONFIG_KEY, CONFIG_VALUE)
-        values ('{0}', '{0}')
+        values ('{0}', '{1}')
         """.format(key, lValue)
         GSQLite.Instance().queryWrite(lSql)
     #================================================
