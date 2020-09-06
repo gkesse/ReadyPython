@@ -1,5 +1,5 @@
 #================================================
-class GYouTube:
+class GSQLiteUi:
     #================================================
     m_instance = None
     #================================================
@@ -8,9 +8,9 @@ class GYouTube:
     #================================================
     @staticmethod 
     def Instance():
-        if GYouTube.m_instance == None:
-            GYouTube.m_instance = GYouTube()
-        return GYouTube.m_instance
+        if GSQLiteUi.m_instance == None:
+            GSQLiteUi.m_instance = GSQLiteUi()
+        return GSQLiteUi.m_instance
     #================================================
     def run(self):
         self.G_STATE = "S_INIT"
@@ -19,7 +19,7 @@ class GYouTube:
             elif self.G_STATE == "S_INIT" : self.run_INIT()
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
-            elif self.G_STATE == "S_VIDEO_LOAD" : self.run_VIDEO_LOAD()
+            elif self.G_STATE == "S_TABLES_SHOW" : self.run_TABLES_SHOW()
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             elif self.G_STATE == "S_QUIT" : self.run_QUIT()
@@ -31,7 +31,7 @@ class GYouTube:
     #================================================
     def run_INIT(self):
         print("")
-        print("PYTHON_YOUTUBE !!!")
+        print("PYTHON_SQLITE !!!")
         print("\t%-2s : %s" % ("-q", "quitter l'application"))
         print("\t%-2s : %s" % ("-i", "reinitialiser l'application"))
         print("\t%-2s : %s" % ("-a", "redemarrer l'application"))
@@ -40,23 +40,26 @@ class GYouTube:
         self.G_STATE = "S_LOAD"
     #================================================
     def run_METHOD(self):
-        print("PYTHON_YOUTUBE :")
-        print("\t%-2s : %s" % ("1", "S_VIDEO_LOAD"))
+        print("PYTHON_SQLITE :")
+        print("\t%-2s : %s" % ("1", "S_TABLES_SHOW"))
         print("")
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
-        lLast = GConfig.Instance().getData("PYTHON_YOUTUBE_ID")
-        lAnswer = input("PYTHON_YOUTUBE (%s) ? " % (lLast))
+        lLast = GConfig.Instance().getData("PYTHON_SQLITE_ID")
+        lAnswer = input("PYTHON_SQLITE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "1" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("PYTHON_YOUTUBE_ID", lAnswer)
+        elif lAnswer == "1" : self.G_STATE = "S_TABLES_SHOW" ; GConfig.Instance().setData("PYTHON_SQLITE_ID", lAnswer)
     #================================================
-    def run_VIDEO_LOAD(self):
+    def run_TABLES_SHOW(self):
         print("")
-        print("run_VIDEO_LOAD")
+        GSQLite.Instance().queryShow('''
+        select name from sqlite_master 
+        where type='table'")
+        ''')
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
@@ -75,6 +78,7 @@ class GYouTube:
         elif lAnswer == "n" : self.G_STATE = "S_INIT"
         elif lAnswer == "" : self.G_STATE = "S_INIT"
 #================================================
-from .GConfig import GConfig
 from .GProcess import GProcess
+from .GConfig import GConfig
+from .GSQLite import GSQLite
 #================================================

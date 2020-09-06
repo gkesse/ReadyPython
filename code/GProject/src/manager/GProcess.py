@@ -19,6 +19,7 @@ class GProcess:
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
             elif self.G_STATE == "S_YOUTUBE" : self.run_YOUTUBE()
+            elif self.G_STATE == "S_SQLITE" : self.run_SQLITE()
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             else : break
@@ -33,6 +34,7 @@ class GProcess:
     def run_METHOD(self):
         print("PYTHON_ADMIN :")
         print("\t%-2s : %s" % ("1", "S_YOUTUBE"))
+        print("\t%-2s : %s" % ("2", "S_SQLITE"))
         print("")
         self.G_STATE = "S_CHOICE"
     #================================================
@@ -42,10 +44,16 @@ class GProcess:
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
+        elif lAnswer == "2" : self.G_STATE = "S_SQLITE" ; GConfig.Instance().setData("PYTHON_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
         print("")
-        GYouTube.Instance().run()
+        GYouTubeUi.Instance().run()
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_SQLITE(self):
+        print("")
+        GSQLiteUi.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
@@ -55,5 +63,6 @@ class GProcess:
         self.G_STATE = "S_METHOD"
 #================================================
 from .GConfig import GConfig
-from .GYouTube import GYouTube
+from .GYouTubeUi import GYouTubeUi
+from .GSQLiteUi import GSQLiteUi
 #================================================
