@@ -60,9 +60,11 @@ class GYouTubeUi:
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
+        GConfig.Instance().saveData("PYTHON_YOUTUBE_ID")
         self.G_STATE = "S_QUIT"
     #================================================
     def run_LOAD(self):
+        GConfig.Instance().loadData("PYTHON_YOUTUBE_ID")
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):

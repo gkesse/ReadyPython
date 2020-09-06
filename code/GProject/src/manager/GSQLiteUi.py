@@ -77,9 +77,11 @@ class GSQLiteUi:
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
+        GConfig.Instance().saveData("PYTHON_SQLITE_ID")
         self.G_STATE = "S_QUIT"
     #================================================
     def run_LOAD(self):
+        GConfig.Instance().loadData("PYTHON_SQLITE_ID")
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
