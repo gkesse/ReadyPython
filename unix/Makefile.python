@@ -4,13 +4,10 @@ GBUILD = build
 GTARGET = $(GBIN)/gp_python.exe
    
 all: compile
-pip: pip_install
 
 compile: $(GSRC)/main.py
-	@python3 $(GSRC)/main.py
-pip_install: 
-	pip2 install $(GARGS)
+	@python $(GSRC)/main.py
 exe: $(GSRC)/main.py
-	python3 -m PyInstaller $(GSRC)/main.py
+	python -m PyInstaller $(GSRC)/main.py
 run: 
 	@$(GTARGET)
