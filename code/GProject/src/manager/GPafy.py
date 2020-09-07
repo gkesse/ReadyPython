@@ -46,8 +46,24 @@ class GPafy:
     def videoLoad(self, url, path):
         lVideo = pafy.new(url)
         lTitle = lVideo.title
-        lBest = lVideo.getbest()
-        lExtension = lBest.extension
+        lBestVideo = lVideo.getbest()
+        lExtension = lBestVideo.extension
         lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
-        lBest.download(filepath=lFilename)    
+        lBestVideo.download(filepath=lFilename)    
+    #================================================
+    def videoOnly(self, url, path):
+        lVideo = pafy.new(url)
+        lTitle = lVideo.title
+        lBestVideo = lVideo.getbestvideo()
+        lExtension = lBestVideo.extension
+        lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
+        lBestVideo.download(filepath=lFilename)    
+    #================================================
+    def audioOnly(self, url, path):
+        lVideo = pafy.new(url)
+        lTitle = lVideo.title
+        lBestAudio = lVideo.getbestaudio()
+        lExtension = lBestAudio.extension
+        lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
+        lBestAudio.download(filepath=lFilename)    
 #================================================

@@ -27,6 +27,14 @@ class GYouTubeUi:
             elif self.G_STATE == "S_VIDEO_LOAD_VIDEO_PATH" : self.run_VIDEO_LOAD_VIDEO_PATH()
             elif self.G_STATE == "S_VIDEO_LOAD" : self.run_VIDEO_LOAD()
             #
+            elif self.G_STATE == "S_VIDEO_ONLY_LOAD_VIDEO_URL" : self.run_VIDEO_ONLY_LOAD_VIDEO_URL()
+            elif self.G_STATE == "S_VIDEO_ONLY_LOAD_VIDEO_PATH" : self.run_VIDEO_ONLY_LOAD_VIDEO_PATH()
+            elif self.G_STATE == "S_VIDEO_ONLY_LOAD" : self.run_VIDEO_ONLY_LOAD()
+            #
+            elif self.G_STATE == "S_AUDIO_ONLY_LOAD_VIDEO_URL" : self.run_AUDIO_ONLY_LOAD_VIDEO_URL()
+            elif self.G_STATE == "S_AUDIO_ONLY_LOAD_AUDIO_PATH" : self.run_AUDIO_ONLY_LOAD_AUDIO_PATH()
+            elif self.G_STATE == "S_AUDIO_ONLY_LOAD" : self.run_AUDIO_ONLY_LOAD()
+            #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             elif self.G_STATE == "S_QUIT" : self.run_QUIT()
@@ -50,6 +58,8 @@ class GYouTubeUi:
         print("PYTHON_YOUTUBE :")
         print("\t%-2s : %s" % ("1", "afficher les infos sur une video"))
         print("\t%-2s : %s" % ("2", "telecharger une video"))
+        print("\t%-2s : %s" % ("3", "telecharger la video seule"))
+        print("\t%-2s : %s" % ("4", "telecharger le son audio seule"))
         print("")
         self.G_STATE = "S_CHOICE"
     #================================================
@@ -63,6 +73,9 @@ class GYouTubeUi:
         #
         elif lAnswer == "1" : self.G_STATE = "S_VIDEO_INFO_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
         elif lAnswer == "2" : self.G_STATE = "S_VIDEO_LOAD_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
+        elif lAnswer == "3" : self.G_STATE = "S_VIDEO_ONLY_LOAD_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
+        elif lAnswer == "4" : self.G_STATE = "S_AUDIO_ONLY_LOAD_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
+        #
     #================================================
     def run_VIDEO_INFO_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
@@ -107,16 +120,72 @@ class GYouTubeUi:
         GPafy.Instance().videoLoad(lUrl, lPath)
         self.G_STATE = "S_SAVE"
     #================================================
+    def run_VIDEO_ONLY_LOAD_VIDEO_URL(self):
+        lLast = GConfig.Instance().getData("G_VIDEO_URL")
+        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
+        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        elif lAnswer == "-v" : self.G_STATE = "S_VIDEO_ONLY_LOAD"
+        elif lAnswer != "" : self.G_STATE = "S_VIDEO_ONLY_LOAD_VIDEO_PATH" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
+    #================================================
+    def run_VIDEO_ONLY_LOAD_VIDEO_PATH(self):
+        lLast = GConfig.Instance().getData("G_VIDEO_PATH")
+        lAnswer = input("G_VIDEO_PATH (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
+        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        elif lAnswer == "-v" : self.G_STATE = "S_VIDEO_ONLY_LOAD"
+        elif lAnswer != "" : self.G_STATE = "S_VIDEO_ONLY_LOAD" ; GConfig.Instance().setData("G_VIDEO_PATH", lAnswer)
+    #================================================
+    def run_VIDEO_ONLY_LOAD(self):
+        print("")
+        lUrl = GConfig.Instance().getData("G_VIDEO_URL");
+        lPath = GConfig.Instance().getData("G_VIDEO_PATH");
+        GPafy.Instance().videoOnly(lUrl, lPath)
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_AUDIO_ONLY_LOAD_VIDEO_URL(self):
+        lLast = GConfig.Instance().getData("G_VIDEO_URL")
+        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
+        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        elif lAnswer == "-v" : self.G_STATE = "S_AUDIO_ONLY_LOAD"
+        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD_AUDIO_PATH" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
+    #================================================
+    def run_AUDIO_ONLY_LOAD_AUDIO_PATH(self):
+        lLast = GConfig.Instance().getData("G_AUDIO_PATH")
+        lAnswer = input("G_AUDIO_PATH (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
+        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        elif lAnswer == "-v" : self.G_STATE = "S_AUDIO_ONLY_LOAD"
+        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD" ; GConfig.Instance().setData("G_AUDIO_PATH", lAnswer)
+    #================================================
+    def run_AUDIO_ONLY_LOAD(self):
+        print("")
+        lUrl = GConfig.Instance().getData("G_VIDEO_URL");
+        lPath = GConfig.Instance().getData("G_VIDEO_PATH");
+        GPafy.Instance().audioOnly(lUrl, lPath)
+        self.G_STATE = "S_SAVE"
+    #================================================
     def run_SAVE(self):
         GConfig.Instance().saveData("G_YOUTUBE_ID")
         GConfig.Instance().saveData("G_VIDEO_URL")
         GConfig.Instance().saveData("G_VIDEO_PATH")
+        GConfig.Instance().saveData("G_AUDIO_PATH")
         self.G_STATE = "S_QUIT"
     #================================================
     def run_LOAD(self):
         GConfig.Instance().loadData("G_YOUTUBE_ID")
         GConfig.Instance().loadData("G_VIDEO_URL")
         GConfig.Instance().loadData("G_VIDEO_PATH")
+        GConfig.Instance().loadData("G_AUDIO_PATH")
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
