@@ -55,6 +55,7 @@ class GPafy:
         lVideo = pafy.new(url)
         lTitle = lVideo.title
         lBestVideo = lVideo.getbestvideo()
+        print(lBestVideo)
         lExtension = lBestVideo.extension
         lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
         lBestVideo.download(filepath=lFilename)    
