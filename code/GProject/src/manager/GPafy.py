@@ -19,30 +19,29 @@ class GPafy:
     #================================================
     def videoInfo(self, url):
         lVideo = pafy.new(url)
-        print("%-20s : %s" % ("url", url))
-        print("%-20s : %s" % ("lVideo.title", lVideo.title))
-        print("%-20s : %s" % ("lVideo.rating", lVideo.rating))
-        print("%-20s : %s" % ("lVideo.viewcount", lVideo.viewcount))
-        print("%-20s : %s" % ("lVideo.author", lVideo.author))
-        print("%-20s : %s" % ("lVideo.length", lVideo.length))
-        print("%-20s : %s" % ("lVideo.duration", lVideo.duration))
-        print("%-20s : %s" % ("lVideo.likes", lVideo.likes))
-        print("%-20s : %s" % ("lVideo.dislikes", lVideo.dislikes))
+        print("%-30s : %s" % ("url", url))
+        print("%-30s : %s" % ("lVideo.title", lVideo.title))
+        print("%-30s : %s" % ("lVideo.rating", lVideo.rating))
+        print("%-30s : %s" % ("lVideo.viewcount", lVideo.viewcount))
+        print("%-30s : %s" % ("lVideo.author", lVideo.author))
+        print("%-30s : %s" % ("lVideo.length", lVideo.length))
+        print("%-30s : %s" % ("lVideo.duration", lVideo.duration))
+        print("%-30s : %s" % ("lVideo.likes", lVideo.likes))
+        print("%-30s : %s" % ("lVideo.dislikes", lVideo.dislikes))
         print("")
-        lStreams = lVideo.streams
-        lStream = ""
-        for lStream in lStreams :
-            break
-        print("%-20s : %s" % ("lStream.resolution", lStream.resolution))
-        print("%-20s : %s" % ("lStream.extension", lStream.extension))
-        print("%-20s : %s" % ("lStream.get_filesize()", lStream.get_filesize()))
-        print("%-20s : %s" % ("lStream.url", lStream.url))
+
+        lBestVideo = lVideo.getbest()
+        print("%-30s : %s" % ("lBestVideo.resolution", lBestVideo.resolution))       
+        print("%-30s : %s" % ("lBestVideo.extension", lBestVideo.extension))       
+        print("%-30s : %s" % ("lBestVideo.get_filesize()", lBestVideo.get_filesize()))       
+        print("%-30s : %s" % ("lBestVideo.url", lBestVideo.url))       
         print("")
-        lBest = lVideo.getbest()
-        print("%-20s : %s" % ("lBest.resolution", lBest.resolution))       
-        print("%-20s : %s" % ("lBest.extension", lBest.extension))       
-        print("%-20s : %s" % ("lBest.get_filesize()", lBest.get_filesize()))       
-        print("%-20s : %s" % ("lBest.url", lBest.url))       
+        
+        lBestAudio = lVideo.getbestaudio()
+        print("%-30s : %s" % ("lBestAudio.bitrate", lBestAudio.bitrate))       
+        print("%-30s : %s" % ("lBestAudio.extension", lBestAudio.extension))       
+        print("%-30s : %s" % ("lBestAudio.get_filesize()", lBestAudio.get_filesize()))       
+        print("")
     #================================================
     def videoLoad(self, url, path):
         lVideo = pafy.new(url)
