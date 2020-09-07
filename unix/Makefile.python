@@ -7,10 +7,10 @@ all: compile
 pip: pip_install
 
 compile: $(GSRC)/main.py
-	@python $(GSRC)/main.py
+	@python3 $(GSRC)/main.py
 pip_install: 
-	python -m pip install $(GARGS)
+	pip2 install $(GARGS)
 exe: $(GSRC)/main.py
-	python -m PyInstaller $(GSRC)/main.py
+	python3 -m PyInstaller $(GSRC)/main.py
 run: 
 	@$(GTARGET)

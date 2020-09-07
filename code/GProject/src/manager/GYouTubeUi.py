@@ -1,3 +1,4 @@
+from pafy import pafy
 #================================================
 class GYouTubeUi:
     #================================================
@@ -19,7 +20,10 @@ class GYouTubeUi:
             elif self.G_STATE == "S_INIT" : self.run_INIT()
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
+            #
+            elif self.G_STATE == "S_VIDEO_LOAD_YOUTUBE_URL" : self.run_VIDEO_LOAD_YOUTUBE_URL()
             elif self.G_STATE == "S_VIDEO_LOAD" : self.run_VIDEO_LOAD()
+            #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             elif self.G_STATE == "S_QUIT" : self.run_QUIT()
@@ -46,25 +50,42 @@ class GYouTubeUi:
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
-        lLast = GConfig.Instance().getData("PYTHON_YOUTUBE_ID")
+        lLast = GConfig.Instance().getData("G_YOUTUBE_ID")
         lAnswer = input("PYTHON_YOUTUBE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "1" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("PYTHON_YOUTUBE_ID", lAnswer)
+        #
+        elif lAnswer == "1" : self.G_STATE = "S_VIDEO_LOAD_YOUTUBE_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
+    #================================================
+    def run_VIDEO_LOAD_YOUTUBE_URL(self):
+        lLast = GConfig.Instance().getData("G_YOUTUBE_URL")
+        lAnswer = input("G_YOUTUBE_URL (%s) ? " % (lLast))
+        if lAnswer == "" : lAnswer = lLast
+        if lAnswer == "-q" : self.G_STATE = "S_END"
+        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
+        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
+        elif lAnswer == "-v" : self.G_STATE = "S_VIDEO_LOAD"
+        elif lAnswer != "" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("G_YOUTUBE_URL", lAnswer)
     #================================================
     def run_VIDEO_LOAD(self):
         print("")
-        print("run_VIDEO_LOAD")
+        lUrl = GConfig.Instance().getData("G_YOUTUBE_URL");
+        #lYouTube = YouTube(lUrl)
+        vPafy = pafy.new(lUrl)
+
+        print("run_VIDEO_LOAD %s" % (vPafy.title))
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
-        GConfig.Instance().saveData("PYTHON_YOUTUBE_ID")
+        GConfig.Instance().saveData("G_YOUTUBE_ID")
+        GConfig.Instance().saveData("G_YOUTUBE_URL")
         self.G_STATE = "S_QUIT"
     #================================================
     def run_LOAD(self):
-        GConfig.Instance().loadData("PYTHON_YOUTUBE_ID")
+        GConfig.Instance().loadData("G_YOUTUBE_ID")
+        GConfig.Instance().loadData("G_YOUTUBE_URL")
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
