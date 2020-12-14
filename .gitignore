@@ -6,4 +6,4 @@
 /**/dist/
 /**/main.spec
 /**/__pycache__/
-/**/__init__.py
+#/**/__init__.py
