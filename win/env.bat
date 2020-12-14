@@ -18,5 +18,5 @@ set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 set "GGIT_URL=https://github.com/gkesse/ReadyJava.git"
 set "GGIT_NAME=ReadyJava"
 ::===============================================
-set "GPIP_PACKAGE_NAME="
+set "GPIP_PACKAGE_NAME=pafy"
 ::===============================================
