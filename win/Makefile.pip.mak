@@ -10,3 +10,5 @@ show:
 	@python -m pip show $(GPIP_PACKAGE_NAME)
 upgrade: 
 	@python -m pip install --upgrade pip
+update: 
+	@python -m pip install --upgrade $(GPIP_PACKAGE_NAME)

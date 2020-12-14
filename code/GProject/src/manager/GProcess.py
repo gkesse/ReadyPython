@@ -13,5 +13,7 @@ class GProcess:
         return GProcess.m_instance
     #================================================
     def run(self):
-        print("ooooooooooooooooooooooo\n")
+        print(sys.argv)
+#================================================
+import sys
 #================================================

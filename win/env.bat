@@ -15,8 +15,8 @@ set "GIMG_PATH=%GDATA_PATH%\img"
 set "GPDF_PATH=%GDATA_PATH%\pdf\config.pdf"
 set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 ::===============================================
-set "GGIT_URL=https://github.com/gkesse/ReadyJava.git"
-set "GGIT_NAME=ReadyJava"
+set "GGIT_URL=https://github.com/gkesse/ReadyPython.git"
+set "GGIT_NAME=ReadyPython"
 ::===============================================
-set "GPIP_PACKAGE_NAME=pafy"
+set "GPIP_PACKAGE_NAME=pyinstaller"
 ::===============================================
