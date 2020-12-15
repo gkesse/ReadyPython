@@ -22,7 +22,11 @@ class GProcess:
         self.runTest()
     #================================================
     def runTest(self):
-        GManager.Instance()
+        lApp = GManager.Instance().getData().app
+        print(lApp.app_name)
+        lApp.app_name = "ReadyDoc"
+        lApp = GManager.Instance().getData().app
+        print(lApp.app_name)
     #================================================
     def runUi(self):
         GProcessUi.Instance().run()

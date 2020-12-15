@@ -4,13 +4,16 @@ class GManager:
     # property
     #================================================
     m_instance = None
-    m_dataMap = {}
+    mgr = None
     #================================================
     # constructor
     #================================================
     def __init__(self):
-        # sqlite
-        self.m_dataMap["sqlite.file"] = "/home/osboxes/Programs/ReadyBin/unix/.CONFIG_O.dat"
+        # manager
+        self.mgr = sGManager()
+        # app
+        self.mgr.app = sGApp()
+        self.mgr.app.app_name = "ReadyApp"
     #================================================
     @staticmethod 
     def Instance():
@@ -20,11 +23,8 @@ class GManager:
     #================================================
     # data
     #================================================
-    def setData(self, key, value):
-        self.m_dataMap[key] = value
-    #================================================
-    def getData(self, key):
-        return self.m_dataMap.get(key, "")
+    def getData(self):
+        return self.mgr
     #================================================
     # env
     #================================================
