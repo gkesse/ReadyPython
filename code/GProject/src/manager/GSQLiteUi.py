@@ -105,7 +105,7 @@ class GSQLiteUi:
         GSQLite.Instance().queryShow("""
         select * from CONFIG_DATA
         order by config_key
-        """, "30;50", 20)
+        """, "20;40", 20)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_CONFIG_DATA_CREATE(self):
