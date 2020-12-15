@@ -19,5 +19,7 @@ set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 set "GGIT_URL=https://github.com/gkesse/ReadyPython.git"
 set "GGIT_NAME=ReadyPython"
 ::===============================================
-set "GPIP_PACKAGE_NAME=cx_Freeze"
+set "GPIP_PACKAGE_NAME=pafy"
+set "GPIP_PACKAGE_NAME=youtube-dl"
+set "GPIP_PACKAGE_NAME=db-sqlite3"
 ::===============================================
