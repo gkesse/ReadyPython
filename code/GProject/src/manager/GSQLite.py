@@ -8,6 +8,12 @@ class GSQLite:
     #================================================
     def __init__(self):
         # config_data
+        self.queryWrite("""
+        create table if not exists config_data ( 
+        config_key text,
+        config_value text
+        )""")
+        # config_data
         self.queryShow("""
         select name from sqlite_master 
         where type='table'
