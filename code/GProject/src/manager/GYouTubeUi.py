@@ -28,9 +28,6 @@ class GYouTubeUi:
             elif self.G_STATE == "S_VIDEO_LOAD_VIDEO_URL" : self.run_VIDEO_LOAD_VIDEO_URL()
             elif self.G_STATE == "S_VIDEO_LOAD" : self.run_VIDEO_LOAD()
             #
-            elif self.G_STATE == "S_AUDIO_ONLY_LOAD_VIDEO_URL" : self.run_AUDIO_ONLY_LOAD_VIDEO_URL()
-            elif self.G_STATE == "S_AUDIO_ONLY_LOAD" : self.run_AUDIO_ONLY_LOAD()
-            #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             elif self.G_STATE == "S_QUIT" : self.run_QUIT()
@@ -54,7 +51,6 @@ class GYouTubeUi:
         sys.stdout.write("PYTHON_YOUTUBE :\n")
         sys.stdout.write("\t%-2s : %s\n" % ("1", "afficher les infos sur une video"))
         sys.stdout.write("\t%-2s : %s\n" % ("2", "telecharger une video"))
-        sys.stdout.write("\t%-2s : %s\n" % ("3", "telecharger le son audio seule"))
         sys.stdout.write("\n")
         self.G_STATE = "S_CHOICE"
     #================================================
@@ -68,7 +64,6 @@ class GYouTubeUi:
         #
         elif lAnswer == "1" : self.G_STATE = "S_VIDEO_INFO_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
         elif lAnswer == "2" : self.G_STATE = "S_VIDEO_LOAD_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
-        elif lAnswer == "3" : self.G_STATE = "S_AUDIO_ONLY_LOAD_VIDEO_URL" ; GConfig.Instance().setData("G_YOUTUBE_ID", lAnswer)
         #
     #================================================
     def run_VIDEO_INFO_VIDEO_URL(self):
@@ -84,7 +79,7 @@ class GYouTubeUi:
     def run_VIDEO_INFO(self):
         sys.stdout.write("\n")
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
-        GPafy.Instance().videoInfo(lUrl)
+        GPafy.Instance().showInfo(lUrl)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_VIDEO_LOAD_VIDEO_URL(self):
@@ -99,26 +94,8 @@ class GYouTubeUi:
     #================================================
     def run_VIDEO_LOAD(self):
         sys.stdout.write("\n")
-        lApp = GManager.Instance().getData().app
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
-        GPafy.Instance().videoLoad(lUrl)
-        self.G_STATE = "S_SAVE"
-    #================================================
-    def run_AUDIO_ONLY_LOAD_VIDEO_URL(self):
-        lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
-        if lAnswer == "" : lAnswer = lLast
-        if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
-        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "-v" : self.G_STATE = "S_AUDIO_ONLY_LOAD"
-        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
-    #================================================
-    def run_AUDIO_ONLY_LOAD(self):
-        sys.stdout.write("\n")
-        lApp = GManager.Instance().getData().app
-        lUrl = GConfig.Instance().getData("G_VIDEO_URL");
-        GPafy.Instance().audioOnly(lUrl, lApp.audio_path)
+        GPafy.Instance().loadVideo(lUrl)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
@@ -144,5 +121,4 @@ class GYouTubeUi:
 from .GConfig import GConfig
 from .GProcess import GProcess
 from .GPafy import GPafy
-from .GManager import GManager
 #================================================

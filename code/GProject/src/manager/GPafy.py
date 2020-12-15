@@ -15,10 +15,9 @@ class GPafy:
             GPafy.m_instance = GPafy()
         return GPafy.m_instance
     #================================================
-    def setData(self, key, value):
-        self.m_dataMap[key] = value
+    # video
     #================================================
-    def videoInfo(self, url):
+    def showInfo(self, url):
         lVideo = pafy.new(url)
         sys.stdout.write("%-30s : %s\n" % ("url", url))
         sys.stdout.write("%-30s : %s\n" % ("lVideo.title", lVideo.title))
@@ -44,7 +43,7 @@ class GPafy:
         sys.stdout.write("%-30s : %s\n" % ("lBestAudio.get_filesize()", lBestAudio.get_filesize()))       
         sys.stdout.write("\n")
     #================================================
-    def videoLoad(self, url):
+    def loadVideo(self, url):
         lApp = GManager.Instance().getData().app
         lVideo = pafy.new(url)
         lTitle = lVideo.title
@@ -54,23 +53,6 @@ class GPafy:
         lFilename = "%s%s%s.%s" % (lApp.video_path, lApp.separator, lTitle, lExtension)
         lBestVideo.download(filepath=lFilename)
         sys.stdout.write("%s\n" % (lFilename))
-    #================================================
-    def videoOnly(self, url, path):
-        lVideo = pafy.new(url)
-        lTitle = lVideo.title
-        lBestVideo = lVideo.getbestvideo()
-        sys.stdout.write(lBestVideo)
-        lExtension = lBestVideo.extension
-        lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
-        lBestVideo.download(filepath=lFilename)    
-    #================================================
-    def audioOnly(self, url, path):
-        lVideo = pafy.new(url)
-        lTitle = lVideo.title
-        lBestAudio = lVideo.getbestaudio()
-        lExtension = lBestAudio.extension
-        lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
-        lBestAudio.download(filepath=lFilename)    
 #================================================
 from .GManager import GManager
 #================================================
