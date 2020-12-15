@@ -22,7 +22,9 @@ class GProcess:
         self.runTest()
     #================================================
     def runTest(self):
-        GSQLite.Instance()
+        lTitle = "abc \/:*?\"<>| def"
+        print(GManager.Instance().validPath(lTitle))
+        print(lTitle) 
     #================================================
     def runUi(self):
         GProcessUi.Instance().run()

@@ -19,6 +19,7 @@ class GManager:
         self.mgr.app.sqlite_db_path = self.getEnv("GSQLITE_DB_PATH")
         self.mgr.app.audio_path = self.getEnv("GAUDIO_PATH")
         self.mgr.app.video_path = self.getEnv("GVIDEO_PATH")
+        self.mgr.app.separator = self.getEnv("GSEPARATOR")
     #================================================
     @staticmethod 
     def Instance():
@@ -46,6 +47,14 @@ class GManager:
         if not lWidthId.isdigit() : return defaultWidth
         lWidth = int(lWidthId)
         return lWidth
+    #================================================
+    # path
+    #================================================
+    def validPath(self, path):
+        lReplace = "\/:*?\"<>|"
+        for lChar in lReplace :
+            path = path.replace(lChar, "")
+        return path
 #================================================
 # struct
 #================================================
@@ -61,4 +70,6 @@ class sGApp:
     audio_path = None
     # video
     video_path = None
+    # separator
+    separator = None
 #================================================

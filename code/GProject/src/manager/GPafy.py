@@ -1,4 +1,5 @@
 #================================================
+import sys
 from pafy import pafy
 #================================================
 class GPafy:
@@ -19,43 +20,46 @@ class GPafy:
     #================================================
     def videoInfo(self, url):
         lVideo = pafy.new(url)
-        print("%-30s : %s" % ("url", url))
-        print("%-30s : %s" % ("lVideo.title", lVideo.title))
-        print("%-30s : %s" % ("lVideo.rating", lVideo.rating))
-        print("%-30s : %s" % ("lVideo.viewcount", lVideo.viewcount))
-        print("%-30s : %s" % ("lVideo.author", lVideo.author))
-        print("%-30s : %s" % ("lVideo.length", lVideo.length))
-        print("%-30s : %s" % ("lVideo.duration", lVideo.duration))
-        print("%-30s : %s" % ("lVideo.likes", lVideo.likes))
-        print("%-30s : %s" % ("lVideo.dislikes", lVideo.dislikes))
-        print("")
+        sys.stdout.write("%-30s : %s\n" % ("url", url))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.title", lVideo.title))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.rating", lVideo.rating))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.viewcount", lVideo.viewcount))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.author", lVideo.author))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.length", lVideo.length))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.duration", lVideo.duration))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.likes", lVideo.likes))
+        sys.stdout.write("%-30s : %s\n" % ("lVideo.dislikes", lVideo.dislikes))
+        sys.stdout.write("\n")
 
         lBestVideo = lVideo.getbest()
-        print("%-30s : %s" % ("lBestVideo.resolution", lBestVideo.resolution))       
-        print("%-30s : %s" % ("lBestVideo.extension", lBestVideo.extension))       
-        print("%-30s : %s" % ("lBestVideo.get_filesize()", lBestVideo.get_filesize()))       
-        print("%-30s : %s" % ("lBestVideo.url", lBestVideo.url))       
-        print("")
+        sys.stdout.write("%-30s : %s\n" % ("lBestVideo.resolution", lBestVideo.resolution))       
+        sys.stdout.write("%-30s : %s\n" % ("lBestVideo.extension", lBestVideo.extension))       
+        sys.stdout.write("%-30s : %s\n" % ("lBestVideo.get_filesize()", lBestVideo.get_filesize()))       
+        sys.stdout.write("%-30s : %s\n" % ("lBestVideo.url", lBestVideo.url))       
+        sys.stdout.write("\n")
         
         lBestAudio = lVideo.getbestaudio()
-        print("%-30s : %s" % ("lBestAudio.bitrate", lBestAudio.bitrate))       
-        print("%-30s : %s" % ("lBestAudio.extension", lBestAudio.extension))       
-        print("%-30s : %s" % ("lBestAudio.get_filesize()", lBestAudio.get_filesize()))       
-        print("")
+        sys.stdout.write("%-30s : %s\n" % ("lBestAudio.bitrate", lBestAudio.bitrate))       
+        sys.stdout.write("%-30s : %s\n" % ("lBestAudio.extension", lBestAudio.extension))       
+        sys.stdout.write("%-30s : %s\n" % ("lBestAudio.get_filesize()", lBestAudio.get_filesize()))       
+        sys.stdout.write("\n")
     #================================================
-    def videoLoad(self, url, path):
+    def videoLoad(self, url):
+        lApp = GManager.Instance().getData().app
         lVideo = pafy.new(url)
         lTitle = lVideo.title
         lBestVideo = lVideo.getbest()
         lExtension = lBestVideo.extension
-        lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
-        lBestVideo.download(filepath=lFilename)    
+        lTitle = GManager.Instance().validPath(lTitle)
+        lFilename = "%s%s%s.%s" % (lApp.video_path, lApp.separator, lTitle, lExtension)
+        lBestVideo.download(filepath=lFilename)
+        sys.stdout.write("%s\n" % (lFilename))
     #================================================
     def videoOnly(self, url, path):
         lVideo = pafy.new(url)
         lTitle = lVideo.title
         lBestVideo = lVideo.getbestvideo()
-        print(lBestVideo)
+        sys.stdout.write(lBestVideo)
         lExtension = lBestVideo.extension
         lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
         lBestVideo.download(filepath=lFilename)    
@@ -67,4 +71,6 @@ class GPafy:
         lExtension = lBestAudio.extension
         lFilename = "{0}/{1}.{2}".format(path, lTitle, lExtension)
         lBestAudio.download(filepath=lFilename)    
+#================================================
+from .GManager import GManager
 #================================================

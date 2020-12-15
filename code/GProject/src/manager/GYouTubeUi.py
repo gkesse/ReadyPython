@@ -26,11 +26,9 @@ class GYouTubeUi:
             elif self.G_STATE == "S_VIDEO_INFO" : self.run_VIDEO_INFO()
             #
             elif self.G_STATE == "S_VIDEO_LOAD_VIDEO_URL" : self.run_VIDEO_LOAD_VIDEO_URL()
-            elif self.G_STATE == "S_VIDEO_LOAD_VIDEO_PATH" : self.run_VIDEO_LOAD_VIDEO_PATH()
             elif self.G_STATE == "S_VIDEO_LOAD" : self.run_VIDEO_LOAD()
             #
             elif self.G_STATE == "S_AUDIO_ONLY_LOAD_VIDEO_URL" : self.run_AUDIO_ONLY_LOAD_VIDEO_URL()
-            elif self.G_STATE == "S_AUDIO_ONLY_LOAD_AUDIO_PATH" : self.run_AUDIO_ONLY_LOAD_AUDIO_PATH()
             elif self.G_STATE == "S_AUDIO_ONLY_LOAD" : self.run_AUDIO_ONLY_LOAD()
             #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
@@ -97,23 +95,13 @@ class GYouTubeUi:
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
         elif lAnswer == "-v" : self.G_STATE = "S_VIDEO_LOAD"
-        elif lAnswer != "" : self.G_STATE = "S_VIDEO_LOAD_VIDEO_PATH" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
-    #================================================
-    def run_VIDEO_LOAD_VIDEO_PATH(self):
-        lLast = GConfig.Instance().getData("G_VIDEO_PATH")
-        lAnswer = raw_input("G_VIDEO_PATH (%s) ? " % (lLast))
-        if lAnswer == "" : lAnswer = lLast
-        if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
-        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "-v" : self.G_STATE = "S_VIDEO_LOAD"
-        elif lAnswer != "" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("G_VIDEO_PATH", lAnswer)
+        elif lAnswer != "" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
     #================================================
     def run_VIDEO_LOAD(self):
         sys.stdout.write("\n")
+        lApp = GManager.Instance().getData().app
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
-        lPath = GConfig.Instance().getData("G_VIDEO_PATH");
-        GPafy.Instance().videoLoad(lUrl, lPath)
+        GPafy.Instance().videoLoad(lUrl)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_AUDIO_ONLY_LOAD_VIDEO_URL(self):
