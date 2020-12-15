@@ -1,7 +1,8 @@
 @echo off
 ::===============================================
 set "PATH=C:\MinGW\bin;%PATH%"
-set "PATH=C:\Python38;%PATH%"
+set "PATH=C:\Python27;%PATH%"
+set "PATH=C:\Users\Admin\Downloads\Programs\ReadyPython\win\dist\main;%PATH%"
 ::===============================================
 set "GPROJECT_ROOT=C:\Users\Admin\Downloads\Programs"
 set "GPROJECT_PATH=%GPROJECT_ROOT%\ReadyPython"
@@ -18,5 +19,5 @@ set "GCMD_PATH=%GDATA_PATH%\cmd\script.bat"
 set "GGIT_URL=https://github.com/gkesse/ReadyPython.git"
 set "GGIT_NAME=ReadyPython"
 ::===============================================
-set "GPIP_PACKAGE_NAME=pyinstaller"
+set "GPIP_PACKAGE_NAME=cx_Freeze"
 ::===============================================

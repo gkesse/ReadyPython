@@ -1,14 +1,12 @@
 all:
 
 version: 
-	@python -m pip --version
+	@python -m $(GPIP_PACKAGE_NAME) --version
 install: 
 	@python -m pip install $(GPIP_PACKAGE_NAME)
 list: 
 	@python -m pip list
-show: 
-	@python -m pip show $(GPIP_PACKAGE_NAME)
 upgrade: 
-	@python -m pip install --upgrade pip
-update: 
 	@python -m pip install --upgrade $(GPIP_PACKAGE_NAME)
+reinstall: 
+	@python -m pip install --force-reinstall $(GPIP_PACKAGE_NAME)

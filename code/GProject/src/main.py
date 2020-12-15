@@ -2,7 +2,7 @@
 from manager.GProcess import GProcess
 #================================================
 def GMain():
-    print("GProcess.Instance().run()")
+    GProcess.Instance().run()
 #================================================
 GMain()
 #================================================
