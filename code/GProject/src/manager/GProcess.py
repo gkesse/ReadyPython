@@ -24,9 +24,7 @@ class GProcess:
     def runTest(self):
         lApp = GManager.Instance().getData().app
         print(lApp.app_name)
-        lApp.app_name = "ReadyDoc"
-        lApp = GManager.Instance().getData().app
-        print(lApp.app_name)
+        print(lApp.sqlite_db_path)
     #================================================
     def runUi(self):
         GProcessUi.Instance().run()

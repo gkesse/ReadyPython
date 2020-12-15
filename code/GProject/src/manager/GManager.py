@@ -1,4 +1,6 @@
 #================================================
+import os
+#================================================
 class GManager:
     #================================================
     # property
@@ -14,6 +16,7 @@ class GManager:
         # app
         self.mgr.app = sGApp()
         self.mgr.app.app_name = "ReadyApp"
+        self.mgr.app.sqlite_db_path = self.getEnv("GSQLITE_DB_PATH")
     #================================================
     @staticmethod 
     def Instance():
@@ -39,4 +42,6 @@ class sGManager:
 class sGApp:
     # app
     app_name = None
+    # sqlite
+    sqlite_db_path = None
 #================================================
