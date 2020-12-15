@@ -14,10 +14,15 @@ class GSQLite:
         config_value text
         )""")
         # config_data
-        self.queryShow("""
+        print(self.queryValue("""
         select name from sqlite_master 
         where type='table'
-        """, "20", 20)
+        """))
+        # config_data
+        self.queryShow("""
+        select * from sqlite_master 
+        where type='table'
+        """, "", 20)
     #================================================
     @staticmethod 
     def Instance():
@@ -42,14 +47,11 @@ class GSQLite:
         lNameMap = lCursor.description
         lColCount = len(lNameMap)
         # sep
-        i = 0
         sys.stdout.write("+-")
-        while i < lColCount :
+        for i in range(lColCount) :
             if i != 0 : sys.stdout.write("-+-")
             lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth)
-            j = 0
-            while j < lWidth : sys.stdout.write("-") ; j += 1
-            i += 1
+            for j in range(lWidth) : sys.stdout.write("-")
         sys.stdout.write("-+")
         sys.stdout.write("\n")
         # header
@@ -64,37 +66,29 @@ class GSQLite:
         sys.stdout.write(" |")
         sys.stdout.write("\n")
         # sep
-        i = 0
         sys.stdout.write("+-")
-        while i < lColCount :
+        for i in range(lColCount) :
             if i != 0 : sys.stdout.write("-+-")
             lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth)
-            j = 0
-            while j < lWidth : sys.stdout.write("-") ; j += 1
-            i += 1
+            for j in range(lWidth) : sys.stdout.write("-")
         sys.stdout.write("-+")
         sys.stdout.write("\n")
         # data
         for lDataRow in lCursor :
             sys.stdout.write("| ")
-            i = 0
-            while i < lColCount :
+            for i in range(lColCount) :
                 if i != 0 : sys.stdout.write(" | ")
                 lData = lDataRow[i]
                 lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth)
                 sys.stdout.write("%*s" %(-lWidth, lData))
-                i += 1
             sys.stdout.write(" |")
             sys.stdout.write("\n")
         # sep
-        i = 0
         sys.stdout.write("+-")
-        while i < lColCount :
+        for i in range(lColCount) :
             if i != 0 : sys.stdout.write("-+-")
             lWidth = GManager.Instance().getWidth(widthMap, i, defaultWidth)
-            j = 0
-            while j < lWidth : sys.stdout.write("-") ; j += 1
-            i += 1
+            for j in range(lWidth) : sys.stdout.write("-")
         sys.stdout.write("-+")
         sys.stdout.write("\n")
         # close
@@ -102,12 +96,25 @@ class GSQLite:
     #================================================
     def queryValue(self, sql):
         lConnect = self.open()
-        lDataMap = lConnect.execute(sql)
-        lValue = ""
-        for lData in lDataMap :
-            lValue = lData[0]
-        lSqlite.close()
-        return lValue
+        lCursor = lConnect.execute(sql)
+        lData = ""
+        for lDataRow in lCursor :
+            lData = lDataRow[0]
+            break
+        lConnect.close()
+        return lData
+    #================================================
+    def queryCol(self, sql):
+        lConnect = self.open()
+        lCursor = lConnect.execute(sql)
+        lNameMap = lCursor.description
+        lColCount = len(lNameMap)
+        lData = ""
+        for lDataRow in lCursor :
+            lData = lDataRow[0]
+            break
+        lConnect.close()
+        return lData
 #================================================
 from .GManager import GManager
 #================================================
