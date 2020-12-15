@@ -124,37 +124,23 @@ class GYouTubeUi:
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
         elif lAnswer == "-v" : self.G_STATE = "S_AUDIO_ONLY_LOAD"
-        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD_AUDIO_PATH" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
-    #================================================
-    def run_AUDIO_ONLY_LOAD_AUDIO_PATH(self):
-        lLast = GConfig.Instance().getData("G_AUDIO_PATH")
-        lAnswer = raw_input("G_AUDIO_PATH (%s) ? " % (lLast))
-        if lAnswer == "" : lAnswer = lLast
-        if lAnswer == "-q" : self.G_STATE = "S_END"
-        elif lAnswer == "-i" : self.G_STATE = "S_INIT"
-        elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "-v" : self.G_STATE = "S_AUDIO_ONLY_LOAD"
-        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD" ; GConfig.Instance().setData("G_AUDIO_PATH", lAnswer)
+        elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
     #================================================
     def run_AUDIO_ONLY_LOAD(self):
         sys.stdout.write("\n")
+        lApp = GManager.Instance().getData().app
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
-        lPath = GConfig.Instance().getData("G_VIDEO_PATH");
-        GPafy.Instance().audioOnly(lUrl, lPath)
+        GPafy.Instance().audioOnly(lUrl, lApp.audio_path)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
         GConfig.Instance().saveData("G_YOUTUBE_ID")
         GConfig.Instance().saveData("G_VIDEO_URL")
-        GConfig.Instance().saveData("G_VIDEO_PATH")
-        GConfig.Instance().saveData("G_AUDIO_PATH")
         self.G_STATE = "S_QUIT"
     #================================================
     def run_LOAD(self):
         GConfig.Instance().loadData("G_YOUTUBE_ID")
         GConfig.Instance().loadData("G_VIDEO_URL")
-        GConfig.Instance().loadData("G_VIDEO_PATH")
-        GConfig.Instance().loadData("G_AUDIO_PATH")
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
@@ -170,4 +156,5 @@ class GYouTubeUi:
 from .GConfig import GConfig
 from .GProcess import GProcess
 from .GPafy import GPafy
+from .GManager import GManager
 #================================================

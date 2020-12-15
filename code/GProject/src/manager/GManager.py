@@ -17,6 +17,8 @@ class GManager:
         self.mgr.app = sGApp()
         self.mgr.app.app_name = "ReadyApp"
         self.mgr.app.sqlite_db_path = self.getEnv("GSQLITE_DB_PATH")
+        self.mgr.app.audio_path = self.getEnv("GAUDIO_PATH")
+        self.mgr.app.video_path = self.getEnv("GVIDEO_PATH")
     #================================================
     @staticmethod 
     def Instance():
@@ -55,4 +57,8 @@ class sGApp:
     app_name = None
     # sqlite
     sqlite_db_path = None
+    # audio
+    audio_path = None
+    # video
+    video_path = None
 #================================================
