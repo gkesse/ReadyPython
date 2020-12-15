@@ -83,15 +83,6 @@ class GSQLiteUi:
         elif lAnswer == "-v" : self.G_STATE = "S_CONFIG_DATA_DELETE"
         elif lAnswer != "" : self.G_STATE = "S_CONFIG_DATA_DELETE" ; GConfig.Instance().setData("G_KEY_NAME", lAnswer)
     #================================================
-    def run_CONFIG_DATA_DELETE(self):
-        sys.stdout.write("\n")
-        lKey = GConfig.Instance().getData("G_KEY_NAME");
-        GSQLite.Instance().queryWrite("""
-        delete from CONFIG_DATA
-        where config_key = '{0}'
-        """.format(lKey))
-        self.G_STATE = "S_CONFIG_DATA_SHOW"
-    #================================================
     def run_TABLES_SHOW(self):
         sys.stdout.write("\n")
         GSQLite.Instance().queryShow("""
@@ -103,7 +94,7 @@ class GSQLiteUi:
     def run_CONFIG_DATA_SHOW(self):
         sys.stdout.write("\n")
         GSQLite.Instance().queryShow("""
-        select * from CONFIG_DATA
+        select * from config_data
         order by config_key
         """, "20;40", 20)
         self.G_STATE = "S_SAVE"
@@ -122,6 +113,15 @@ class GSQLiteUi:
         GSQLite.Instance().queryWrite("""
         drop table if exists config_data
         """)
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_CONFIG_DATA_DELETE(self):
+        lKey = GConfig.Instance().getData("G_KEY_NAME");
+        GSQLite.Instance().queryWrite("""
+        delete from config_data
+        where config_key = '%s'
+        """ % (lKey))
+        self.run_CONFIG_DATA_SHOW()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
