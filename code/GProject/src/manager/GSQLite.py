@@ -7,7 +7,11 @@ class GSQLite:
     m_instance = None
     #================================================
     def __init__(self):
-        pass
+        # config_data
+        self.queryShow("""
+        select name from sqlite_master 
+        where type='table'
+        """)
     #================================================
     @staticmethod 
     def Instance():
@@ -15,38 +19,32 @@ class GSQLite:
             GSQLite.m_instance = GSQLite()
         return GSQLite.m_instance
     #================================================
-    def test(self):
-        self.queryShow("""
-        select name from sqlite_master 
-        where type='table'
-        """)
-        sys.exit()
+    def open(self):
+        lApp = GManager.Instance().getData().app
+        lConnect = sqlite3.connect(lApp.sqlite_db_path)
+        return lConnect
     #================================================
     def queryCreate(self, sql):
-        lSqliteF = GManager.Instance().getData("sqlite.file")
-        lSqlite = sqlite3.connect(lSqliteF)
-        lSqlite.execute(sql)
-        lSqlite.close()
+        lConnect = self.open()
+        lConnect.execute(sql)
+        lConnect.close()
     #================================================
     def queryWrite(self, sql):
-        lSqliteF = GManager.Instance().getData("sqlite.file")
-        lSqlite = sqlite3.connect(lSqliteF)
-        lSqlite.execute(sql)
-        lSqlite.commit()
-        lSqlite.close()
+        lConnect = self.open()
+        lConnect.execute(sql)
+        lConnect.commit()
+        lConnect.close()
     #================================================
     def queryShow(self, sql):
-        lSqliteF = GManager.Instance().getData("sqlite.file")
-        lSqlite = sqlite3.connect(lSqliteF)
-        lDataMap = lSqlite.execute(sql)
+        lConnect = self.open()
+        lDataMap = lConnect.execute(sql)
         for lData in lDataMap :
             print(lData)
-        lSqlite.close()
+        lConnect.close()
     #================================================
     def queryValue(self, sql):
-        lSqliteF = GManager.Instance().getData("sqlite.file")
-        lSqlite = sqlite3.connect(lSqliteF)
-        lDataMap = lSqlite.execute(sql)
+        lConnect = self.open()
+        lDataMap = lConnect.execute(sql)
         lValue = ""
         for lData in lDataMap :
             lValue = lData[0]

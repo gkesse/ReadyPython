@@ -22,13 +22,12 @@ class GProcess:
         self.runTest()
     #================================================
     def runTest(self):
-        lApp = GManager.Instance().getData().app
-        print(lApp.app_name)
-        print(lApp.sqlite_db_path)
+        GSQLite.Instance()
     #================================================
     def runUi(self):
         GProcessUi.Instance().run()
 #================================================
 from .GProcessUi import GProcessUi
+from .GSQLite import GSQLite
 from .GManager import GManager
 #================================================
