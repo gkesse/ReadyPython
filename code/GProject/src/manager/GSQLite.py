@@ -107,14 +107,39 @@ class GSQLite:
     def queryCol(self, sql):
         lConnect = self.open()
         lCursor = lConnect.execute(sql)
-        lNameMap = lCursor.description
-        lColCount = len(lNameMap)
-        lData = ""
+        lDataMap = []
         for lDataRow in lCursor :
             lData = lDataRow[0]
+            lDataMap.append(lData)
+        lConnect.close()
+        return lDataMap
+    #================================================
+    def queryRow(self, sql):
+        lConnect = self.open()
+        lCursor = lConnect.execute(sql)
+        lColCount = len(lCursor.description)
+        lDataMap = []
+        for lDataRow in lCursor :
+            for i in range(lColCount) :
+                lData = lDataRow[i]
+                lDataMap.append(lData)
             break
         lConnect.close()
-        return lData
+        return lDataMap
+    #================================================
+    def queryMap(self, sql):
+        lConnect = self.open()
+        lCursor = lConnect.execute(sql)
+        lColCount = len(lCursor.description)
+        lDataMap = []
+        for lDataRow in lCursor :
+            lDataCol = []
+            for i in range(lColCount) :
+                lData = lDataRow[i]
+                lDataCol.append(lData)
+            lDataMap.append(lDataCol)
+        lConnect.close()
+        return lDataMap
 #================================================
 from .GManager import GManager
 #================================================
