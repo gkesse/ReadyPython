@@ -23,12 +23,12 @@ class GSQLiteUi:
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
             #
             elif self.G_STATE == "S_TABLES_SHOW" : self.run_TABLES_SHOW()
-            elif self.G_STATE == "S_CONFIG_SHOW" : self.run_CONFIG_SHOW()
-            elif self.G_STATE == "S_CONFIG_CREATE" : self.run_CONFIG_CREATE()
-            elif self.G_STATE == "S_CONFIG_DROP" : self.run_CONFIG_DROP()
+            elif self.G_STATE == "S_CONFIG_DATA_SHOW" : self.run_CONFIG_DATA_SHOW()
+            elif self.G_STATE == "S_CONFIG_DATA_CREATE" : self.run_CONFIG_DATA_CREATE()
+            elif self.G_STATE == "S_CONFIG_DATA_DROP" : self.run_CONFIG_DATA_DROP()
             #
-            elif self.G_STATE == "S_CONFIG_DELETE_KEY_NAME" : self.run_CONFIG_DELETE_KEY_NAME()
-            elif self.G_STATE == "S_CONFIG_DELETE" : self.run_CONFIG_DELETE()
+            elif self.G_STATE == "S_CONFIG_DATA_DELETE_KEY_NAME" : self.run_CONFIG_DATA_DELETE_KEY_NAME()
+            elif self.G_STATE == "S_CONFIG_DATA_DELETE" : self.run_CONFIG_DATA_DELETE()
             #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
@@ -68,45 +68,29 @@ class GSQLiteUi:
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
         #
         elif lAnswer == "1" : self.G_STATE = "S_TABLES_SHOW" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
-        elif lAnswer == "2" : self.G_STATE = "S_CONFIG_SHOW" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
-        elif lAnswer == "3" : self.G_STATE = "S_CONFIG_CREATE" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
-        elif lAnswer == "4" : self.G_STATE = "S_CONFIG_DROP" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
-        elif lAnswer == "5" : self.G_STATE = "S_CONFIG_DELETE_KEY_NAME" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
+        elif lAnswer == "2" : self.G_STATE = "S_CONFIG_DATA_SHOW" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
+        elif lAnswer == "3" : self.G_STATE = "S_CONFIG_DATA_CREATE" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
+        elif lAnswer == "4" : self.G_STATE = "S_CONFIG_DATA_DROP" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
+        elif lAnswer == "5" : self.G_STATE = "S_CONFIG_DATA_DELETE_KEY_NAME" ; GConfig.Instance().setData("G_SQLITE_ID", lAnswer)
     #================================================
-    def run_CONFIG_DELETE_KEY_NAME(self):
+    def run_CONFIG_DATA_DELETE_KEY_NAME(self):
         lLast = GConfig.Instance().getData("G_KEY_NAME")
         lAnswer = raw_input("G_KEY_NAME (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
-        elif lAnswer == "-v" : self.G_STATE = "S_CONFIG_DELETE"
-        elif lAnswer != "" : self.G_STATE = "S_CONFIG_DELETE" ; GConfig.Instance().setData("G_KEY_NAME", lAnswer)
+        elif lAnswer == "-v" : self.G_STATE = "S_CONFIG_DATA_DELETE"
+        elif lAnswer != "" : self.G_STATE = "S_CONFIG_DATA_DELETE" ; GConfig.Instance().setData("G_KEY_NAME", lAnswer)
     #================================================
-    def run_CONFIG_DELETE(self):
+    def run_CONFIG_DATA_DELETE(self):
         sys.stdout.write("\n")
         lKey = GConfig.Instance().getData("G_KEY_NAME");
         GSQLite.Instance().queryWrite("""
         delete from CONFIG_DATA
-        where CONFIG_KEY = '{0}'
+        where config_key = '{0}'
         """.format(lKey))
-        self.G_STATE = "S_CONFIG_SHOW"
-    #================================================
-    def run_CONFIG_DROP(self):
-        sys.stdout.write("\n")
-        GSQLite.Instance().queryCreate("""
-        drop table CONFIG_DATA
-        """)
-        self.G_STATE = "S_SAVE"
-    #================================================
-    def run_CONFIG_CREATE(self):
-        sys.stdout.write("\n")
-        GSQLite.Instance().queryCreate("""
-        create table CONFIG_DATA (
-        CONFIG_KEY text unique not null,
-        CONFIG_VALUE text
-        )""")
-        self.G_STATE = "S_SAVE"
+        self.G_STATE = "S_CONFIG_DATA_SHOW"
     #================================================
     def run_TABLES_SHOW(self):
         sys.stdout.write("\n")
@@ -116,12 +100,28 @@ class GSQLiteUi:
         """, "30", 20)
         self.G_STATE = "S_SAVE"
     #================================================
-    def run_CONFIG_SHOW(self):
+    def run_CONFIG_DATA_SHOW(self):
         sys.stdout.write("\n")
         GSQLite.Instance().queryShow("""
         select * from CONFIG_DATA
-        order by CONFIG_KEY
+        order by config_key
         """, "30;50", 20)
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_CONFIG_DATA_CREATE(self):
+        sys.stdout.write("\n")
+        GSQLite.Instance().queryWrite("""
+        create table if not exists config_data (
+        config_key text,
+        config_value text
+        )""")
+        self.G_STATE = "S_SAVE"
+    #================================================
+    def run_CONFIG_DATA_DROP(self):
+        sys.stdout.write("\n")
+        GSQLite.Instance().queryWrite("""
+        drop table if exists config_data
+        """)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
