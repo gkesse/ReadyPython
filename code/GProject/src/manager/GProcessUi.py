@@ -1,4 +1,6 @@
 #================================================
+import sys
+#================================================
 class GProcessUi:
     #================================================
     m_instance = None
@@ -18,41 +20,43 @@ class GProcessUi:
             if self.G_STATE == "S_INIT" : self.run_INIT()
             elif self.G_STATE == "S_METHOD" : self.run_METHOD()
             elif self.G_STATE == "S_CHOICE" : self.run_CHOICE()
+            #
             elif self.G_STATE == "S_YOUTUBE" : self.run_YOUTUBE()
             elif self.G_STATE == "S_SQLITE" : self.run_SQLITE()
+            #
             elif self.G_STATE == "S_SAVE" : self.run_SAVE()
             elif self.G_STATE == "S_LOAD" : self.run_LOAD()
             else : break
     #================================================
     def run_INIT(self):
-        print("")
-        print("PYTHON_ADMIN !!!")
-        print("\t%-2s : %s" % ("-q", "quitter l'application"))
-        print("")
+        sys.stdout.write("\n")
+        sys.stdout.write("PYTHON_ADMIN !!!\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("-q", "quitter l'application"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_LOAD"
     #================================================
     def run_METHOD(self):
-        print("PYTHON_ADMIN :")
-        print("\t%-2s : %s" % ("1", "S_YOUTUBE"))
-        print("\t%-2s : %s" % ("2", "S_SQLITE"))
-        print("")
+        sys.stdout.write("PYTHON_ADMIN :\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("1", "S_YOUTUBE"))
+        sys.stdout.write("\t%-2s : %s\n" % ("2", "S_SQLITE"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_ADMIN_ID")
-        lAnswer = input("PYTHON_ADMIN (%s) ? " % (lLast))
+        lAnswer = raw_input("PYTHON_ADMIN (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
         elif lAnswer == "2" : self.G_STATE = "S_SQLITE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
-        print("")
-        GYouTubeUi.Instance().run()
+        sys.stdout.write("\n")
+        #GYouTubeUi.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SQLITE(self):
-        print("")
+        sys.stdout.write("\n")
         #GSQLiteUi.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
