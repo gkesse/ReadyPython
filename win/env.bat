@@ -26,6 +26,3 @@ set "GPIP_PACKAGE_NAME=pafy"
 set "GPIP_PACKAGE_NAME=youtube-dl"
 set "GPIP_PACKAGE_NAME=db-sqlite3"
 ::===============================================
-set "GYOUTUBE_VIDEO_NAME=Jungle Jail - ESMA 2007"
-set "GYOUTUBE_VIDEO_PATH=%GVIDEO_PATH%\%GYOUTUBE_VIDEO_NAME%"
-::===============================================
