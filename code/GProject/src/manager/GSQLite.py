@@ -13,16 +13,6 @@ class GSQLite:
         config_key text,
         config_value text
         )""")
-        # config_data
-        print(self.queryMap("""
-        select * from sqlite_master 
-        where type='table'
-        """))
-        # config_data
-        self.queryShow("""
-        select * from sqlite_master 
-        where type='table'
-        """, "", 20)
     #================================================
     @staticmethod 
     def Instance():
