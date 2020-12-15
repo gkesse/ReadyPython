@@ -22,7 +22,6 @@ class GProcess:
         self.runTest()
     #================================================
     def runTest(self):
-        print(GManager.Instance().getWidth("10;20", 1, 50))
         GSQLite.Instance()
     #================================================
     def runUi(self):
