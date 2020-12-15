@@ -14,8 +14,8 @@ class GSQLite:
         config_value text
         )""")
         # config_data
-        print(self.queryValue("""
-        select name from sqlite_master 
+        print(self.queryMap("""
+        select * from sqlite_master 
         where type='table'
         """))
         # config_data
