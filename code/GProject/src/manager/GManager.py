@@ -33,6 +33,17 @@ class GManager:
     #================================================
     def getEnv(self, key):
         return os.getenv(key)
+    #================================================
+    # string
+    #================================================
+    def getWidth(self, widthMap, index, defaultWidth):
+        lWidthMap = widthMap.split(";")
+        lLength = len(lWidthMap)
+        if index >= lLength : return defaultWidth
+        lWidthId = lWidthMap[index]
+        if not lWidthId.isdigit() : return defaultWidth
+        lWidth = int(lWidthId)
+        return lWidth
 #================================================
 # struct
 #================================================

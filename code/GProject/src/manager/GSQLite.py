@@ -15,7 +15,7 @@ class GSQLite:
         )""")
         # config_data
         self.queryShow("""
-        select name from sqlite_master 
+        select * from sqlite_master 
         where type='table'
         """)
     #================================================
