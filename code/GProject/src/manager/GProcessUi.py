@@ -47,17 +47,16 @@ class GProcessUi:
         lAnswer = raw_input("PYTHON_ADMIN (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
+        #
         elif lAnswer == "1" : self.G_STATE = "S_YOUTUBE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
         elif lAnswer == "2" : self.G_STATE = "S_SQLITE" ; GConfig.Instance().setData("G_ADMIN_ID", lAnswer)
     #================================================
     def run_YOUTUBE(self):
-        sys.stdout.write("\n")
-        #GYouTubeUi.Instance().run()
+        GYouTubeUi.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SQLITE(self):
-        sys.stdout.write("\n")
-        #GSQLiteUi.Instance().run()
+        GSQLiteUi.Instance().run()
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):

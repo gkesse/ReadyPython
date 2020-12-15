@@ -41,26 +41,26 @@ class GYouTubeUi:
         self.G_STATE = "S_END"
     #================================================
     def run_INIT(self):
-        print("")
-        print("PYTHON_YOUTUBE !!!")
-        print("\t%-2s : %s" % ("-q", "quitter l'application"))
-        print("\t%-2s : %s" % ("-i", "reinitialiser l'application"))
-        print("\t%-2s : %s" % ("-a", "redemarrer l'application"))
-        print("\t%-2s : %s" % ("-v", "valider les configurations"))
-        print("")
+        sys.stdout.write("\n")
+        sys.stdout.write("PYTHON_YOUTUBE !!!\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("-q", "quitter l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-i", "reinitialiser l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-a", "redemarrer l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-v", "valider les configurations"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_LOAD"
     #================================================
     def run_METHOD(self):
-        print("PYTHON_YOUTUBE :")
-        print("\t%-2s : %s" % ("1", "afficher les infos sur une video"))
-        print("\t%-2s : %s" % ("2", "telecharger une video"))
-        print("\t%-2s : %s" % ("3", "telecharger le son audio seule"))
-        print("")
+        sys.stdout.write("PYTHON_YOUTUBE :\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("1", "afficher les infos sur une video"))
+        sys.stdout.write("\t%-2s : %s\n" % ("2", "telecharger une video"))
+        sys.stdout.write("\t%-2s : %s\n" % ("3", "telecharger le son audio seule"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_YOUTUBE_ID")
-        lAnswer = input("PYTHON_YOUTUBE (%s) ? " % (lLast))
+        lAnswer = raw_input("PYTHON_YOUTUBE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -73,7 +73,7 @@ class GYouTubeUi:
     #================================================
     def run_VIDEO_INFO_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
+        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -82,14 +82,14 @@ class GYouTubeUi:
         elif lAnswer != "" : self.G_STATE = "S_VIDEO_INFO" ; GConfig.Instance().setData("G_VIDEO_URL", lAnswer)
     #================================================
     def run_VIDEO_INFO(self):
-        print("")
+        sys.stdout.write("\n")
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
         GPafy.Instance().videoInfo(lUrl)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_VIDEO_LOAD_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
+        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -99,7 +99,7 @@ class GYouTubeUi:
     #================================================
     def run_VIDEO_LOAD_VIDEO_PATH(self):
         lLast = GConfig.Instance().getData("G_VIDEO_PATH")
-        lAnswer = input("G_VIDEO_PATH (%s) ? " % (lLast))
+        lAnswer = raw_input("G_VIDEO_PATH (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -108,7 +108,7 @@ class GYouTubeUi:
         elif lAnswer != "" : self.G_STATE = "S_VIDEO_LOAD" ; GConfig.Instance().setData("G_VIDEO_PATH", lAnswer)
     #================================================
     def run_VIDEO_LOAD(self):
-        print("")
+        sys.stdout.write("\n")
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
         lPath = GConfig.Instance().getData("G_VIDEO_PATH");
         GPafy.Instance().videoLoad(lUrl, lPath)
@@ -116,7 +116,7 @@ class GYouTubeUi:
     #================================================
     def run_AUDIO_ONLY_LOAD_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
+        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -126,7 +126,7 @@ class GYouTubeUi:
     #================================================
     def run_AUDIO_ONLY_LOAD_AUDIO_PATH(self):
         lLast = GConfig.Instance().getData("G_AUDIO_PATH")
-        lAnswer = input("G_AUDIO_PATH (%s) ? " % (lLast))
+        lAnswer = raw_input("G_AUDIO_PATH (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -135,7 +135,7 @@ class GYouTubeUi:
         elif lAnswer != "" : self.G_STATE = "S_AUDIO_ONLY_LOAD" ; GConfig.Instance().setData("G_AUDIO_PATH", lAnswer)
     #================================================
     def run_AUDIO_ONLY_LOAD(self):
-        print("")
+        sys.stdout.write("\n")
         lUrl = GConfig.Instance().getData("G_VIDEO_URL");
         lPath = GConfig.Instance().getData("G_VIDEO_PATH");
         GPafy.Instance().audioOnly(lUrl, lPath)
@@ -156,8 +156,8 @@ class GYouTubeUi:
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
-        print("")
-        lAnswer = input("PYTHON_QUIT (Oui/[N]on) ? ")
+        sys.stdout.write("\n")
+        lAnswer = raw_input("PYTHON_QUIT (Oui/[N]on) ? ")
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"

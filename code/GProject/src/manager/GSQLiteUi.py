@@ -1,4 +1,6 @@
 #================================================
+import sys
+#================================================
 class GSQLiteUi:
     #================================================
     m_instance = None
@@ -38,28 +40,28 @@ class GSQLiteUi:
         self.G_STATE = "S_END"
     #================================================
     def run_INIT(self):
-        print("")
-        print("PYTHON_SQLITE !!!")
-        print("\t%-2s : %s" % ("-q", "quitter l'application"))
-        print("\t%-2s : %s" % ("-i", "reinitialiser l'application"))
-        print("\t%-2s : %s" % ("-a", "redemarrer l'application"))
-        print("\t%-2s : %s" % ("-v", "valider les configurations"))
-        print("")
+        sys.stdout.write("\n")
+        sys.stdout.write("PYTHON_SQLITE !!!\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("-q", "quitter l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-i", "reinitialiser l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-a", "redemarrer l'application"))
+        sys.stdout.write("\t%-2s : %s\n" % ("-v", "valider les configurations"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_LOAD"
     #================================================
     def run_METHOD(self):
-        print("PYTHON_SQLITE :")
-        print("\t%-2s : %s" % ("1", "afficher les tables CONFIG_O"))
-        print("\t%-2s : %s" % ("2", "afficher les donnees CONFIG_PYTHON"))
-        print("\t%-2s : %s" % ("3", "creer la table CONFIG_PYTHON"))
-        print("\t%-2s : %s" % ("4", "supprimer la table CONFIG_PYTHON"))
-        print("\t%-2s : %s" % ("5", "supprimer une donnee CONFIG_PYTHON"))
-        print("")
+        sys.stdout.write("PYTHON_SQLITE :\n")
+        sys.stdout.write("\t%-2s : %s\n" % ("1", "afficher les tables"))
+        sys.stdout.write("\t%-2s : %s\n" % ("2", "afficher les donnees CONFIG_DATA"))
+        sys.stdout.write("\t%-2s : %s\n" % ("3", "creer la table CONFIG_DATA"))
+        sys.stdout.write("\t%-2s : %s\n" % ("4", "supprimer la table CONFIG_DATA"))
+        sys.stdout.write("\t%-2s : %s\n" % ("5", "supprimer une donnee CONFIG_DATA"))
+        sys.stdout.write("\n")
         self.G_STATE = "S_CHOICE"
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_SQLITE_ID")
-        lAnswer = input("PYTHON_SQLITE (%s) ? " % (lLast))
+        lAnswer = raw_input("PYTHON_SQLITE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -73,7 +75,7 @@ class GSQLiteUi:
     #================================================
     def run_CONFIG_DELETE_KEY_NAME(self):
         lLast = GConfig.Instance().getData("G_KEY_NAME")
-        lAnswer = input("G_KEY_NAME (%s) ? " % (lLast))
+        lAnswer = raw_input("G_KEY_NAME (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -82,44 +84,44 @@ class GSQLiteUi:
         elif lAnswer != "" : self.G_STATE = "S_CONFIG_DELETE" ; GConfig.Instance().setData("G_KEY_NAME", lAnswer)
     #================================================
     def run_CONFIG_DELETE(self):
-        print("")
+        sys.stdout.write("\n")
         lKey = GConfig.Instance().getData("G_KEY_NAME");
         GSQLite.Instance().queryWrite("""
-        delete from CONFIG_PYTHON
+        delete from CONFIG_DATA
         where CONFIG_KEY = '{0}'
         """.format(lKey))
         self.G_STATE = "S_CONFIG_SHOW"
     #================================================
     def run_CONFIG_DROP(self):
-        print("")
+        sys.stdout.write("\n")
         GSQLite.Instance().queryCreate("""
-        drop table CONFIG_PYTHON
+        drop table CONFIG_DATA
         """)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_CONFIG_CREATE(self):
-        print("")
+        sys.stdout.write("\n")
         GSQLite.Instance().queryCreate("""
-        create table CONFIG_PYTHON (
+        create table CONFIG_DATA (
         CONFIG_KEY text unique not null,
         CONFIG_VALUE text
         )""")
         self.G_STATE = "S_SAVE"
     #================================================
     def run_TABLES_SHOW(self):
-        print("")
+        sys.stdout.write("\n")
         GSQLite.Instance().queryShow("""
         select name from sqlite_master 
         where type='table'
-        """)
+        """, "30", 20)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_CONFIG_SHOW(self):
-        print("")
+        sys.stdout.write("\n")
         GSQLite.Instance().queryShow("""
-        select * from CONFIG_PYTHON
+        select * from CONFIG_DATA
         order by CONFIG_KEY
-        """)
+        """, "30;50", 20)
         self.G_STATE = "S_SAVE"
     #================================================
     def run_SAVE(self):
@@ -133,8 +135,8 @@ class GSQLiteUi:
         self.G_STATE = "S_METHOD"
     #================================================
     def run_QUIT(self):
-        print("")
-        lAnswer = input("PYTHON_QUIT (Oui/[N]on) ? ")
+        sys.stdout.write("\n")
+        lAnswer = raw_input("PYTHON_QUIT (Oui/[N]on) ? ")
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"
