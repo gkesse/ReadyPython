@@ -1,13 +1,13 @@
-GSRC = ..\code\GProject\src
+GSRC = $(GPROJECT_SRC)
 GBUILD = build\main
 GTARGET = $(GBUILD)\main.exe
    
-all: exe run
+all: compile
 
 version:
 	@python --version
 compile:
-	@python $(GSRC)\main.py $(argv)
+	python $(GSRC)\main.py $(argv)
 cxf:
 	@python setup.py build
 pyi:

@@ -22,9 +22,7 @@ class GProcess:
         self.runTest()
     #================================================
     def runTest(self):
-        lTitle = "abc \/:*?\"<>| def"
-        print(GManager.Instance().validPath(lTitle))
-        print(lTitle) 
+        print("Bonjour tout le monde")
     #================================================
     def runUi(self):
         GProcessUi.Instance().run()
