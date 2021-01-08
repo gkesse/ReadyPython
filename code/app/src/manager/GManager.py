@@ -3,12 +3,8 @@ import os
 #================================================
 class GManager:
     #================================================
-    # property
-    #================================================
     m_instance = None
     mgr = None
-    #================================================
-    # constructor
     #================================================
     def __init__(self):
         # manager
@@ -16,6 +12,7 @@ class GManager:
         # app
         self.mgr.app = sGApp()
         self.mgr.app.app_name = "ReadyApp"
+        self.mgr.app.title = self.mgr.app.app_name
         self.mgr.app.sqlite_db_path = self.getEnv("GSQLITE_DB_PATH")
         self.mgr.app.audio_path = self.getEnv("GAUDIO_PATH")
         self.mgr.app.video_path = self.getEnv("GVIDEO_PATH")
@@ -64,6 +61,8 @@ class sGManager:
 class sGApp:
     # app
     app_name = None
+    # title
+    title = None
     # sqlite
     sqlite_db_path = None
     # audio

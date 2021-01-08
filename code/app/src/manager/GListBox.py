@@ -3,14 +3,14 @@ from PyQt5.QtWidgets import *
 #================================================
 from .GWidget import GWidget
 #================================================
-class GAddressKey(GWidget):
+class GListBox(GWidget):
     #================================================
     def __init__(self): 
         super().__init__()
         lApp = GManager.Instance().getData().app
         
         lLabel = QLabel()
-        lLabel.setText("GAddressKey")
+        lLabel.setText("GListBox")
         
         lMainLayout = QVBoxLayout()
         lMainLayout.addWidget(lLabel)
