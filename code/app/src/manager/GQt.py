@@ -17,9 +17,7 @@ class GQt:
     #================================================
     def run(self):
         app = QApplication(sys.argv)
-        GWidget.Create("titlebar").run()
-        lLabel = QLabel("Bonjour tout le monde")
-        lLabel.show()
+        GWidget.Create("titlebar")..show()
         app.exec_()
 #================================================
 from .GWidget import GWidget

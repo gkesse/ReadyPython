@@ -32,7 +32,6 @@ class GProcess:
         GQt.Instance().run()
 #================================================
 from .GProcessUi import GProcessUi
-from .GSQLite import GSQLite
 from .GQt import GQt
 from .GManager import GManager
 #================================================

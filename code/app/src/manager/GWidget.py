@@ -18,4 +18,7 @@ class GWidget(QFrame):
         print("GWidget")
 #================================================
 from .GTitleBar import GTitleBar
+from .GAddressBar import GAddressBar
+from .GAddressKey import GAddressKey
+from .GWindow import GWindow
 #================================================
