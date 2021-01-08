@@ -1,5 +1,6 @@
 #================================================
 import os
+import qtawesome
 #================================================
 class GManager:
     #================================================
@@ -19,6 +20,8 @@ class GManager:
         self.mgr.app.separator = self.getEnv("GSEPARATOR")
         self.mgr.app.page_id = {}
         self.mgr.app.address_url = "home"
+        self.mgr.app.address_new = self.mgr.app.address_url
+        self.mgr.app.qta = qtawesome
     #================================================
     @staticmethod 
     def Instance():
@@ -68,6 +71,17 @@ class GManager:
         self.mgr.app.address_url = address;
         self.mgr.app.address_key.setContent(address);
         self.mgr.app.title.setText(self.mgr.app.title_map[address]);
+    #================================================
+    # layout
+    #================================================
+    def clearLayout(self, layout):
+        if layout != 0:
+            while layout.count() > 0:
+                lItem = layout.takeAt(0)
+                lWidget = lItem.widget()
+                if lWidget != 0: 
+                    layout.removeWidget(lWidget)
+                    lWidget.setParent(None)
 #================================================
 # struct
 #================================================
@@ -95,4 +109,7 @@ class sGApp:
     address = None
     address_key = None
     address_url = None
+    address_new = None
+    # qta
+    qta = None
 #================================================
