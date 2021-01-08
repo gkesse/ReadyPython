@@ -12,11 +12,13 @@ class GManager:
         # app
         self.mgr.app = sGApp()
         self.mgr.app.app_name = "ReadyApp"
-        self.mgr.app.title = self.mgr.app.app_name
+        self.mgr.app.title_map = {}
         self.mgr.app.sqlite_db_path = self.getEnv("GSQLITE_DB_PATH")
         self.mgr.app.audio_path = self.getEnv("GAUDIO_PATH")
         self.mgr.app.video_path = self.getEnv("GVIDEO_PATH")
         self.mgr.app.separator = self.getEnv("GSEPARATOR")
+        self.mgr.app.page_id = {}
+        self.mgr.app.address_url = "home"
     #================================================
     @staticmethod 
     def Instance():
@@ -52,6 +54,20 @@ class GManager:
         for lChar in lReplace :
             path = path.replace(lChar, "")
         return path
+    #================================================
+    # page
+    #================================================
+    def setPage(self, address):
+        lPageId = self.mgr.app.page_id.get(address, -1)
+        if lPageId == -1: self.mgr.app.address.setText(self.mgr.app.address_url); return
+        lPage = self.mgr.app.page_map.widget(lPageId)
+        self.mgr.app.address_new = address;
+        if lPage.loadPage() == 0: self.mgr.app.address.setText(self.mgr.app.address_url); return
+        self.mgr.app.page_map.setCurrentIndex(lPageId);
+        self.mgr.app.address.setText(address);
+        self.mgr.app.address_url = address;
+        self.mgr.app.address_key.setContent(address);
+        self.mgr.app.title.setText(self.mgr.app.title_map[address]);
 #================================================
 # struct
 #================================================
@@ -63,6 +79,7 @@ class sGApp:
     app_name = None
     # title
     title = None
+    title_map = None
     # sqlite
     sqlite_db_path = None
     # audio
@@ -71,4 +88,11 @@ class sGApp:
     video_path = None
     # separator
     separator = None
+    # page
+    page_map = None
+    page_id = None
+    # address
+    address = None
+    address_key = None
+    address_url = None
 #================================================

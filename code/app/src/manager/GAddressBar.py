@@ -9,11 +9,22 @@ class GAddressBar(GWidget):
         super().__init__()
         lApp = GManager.Instance().getData().app
         
-        lLabel = QLabel()
-        lLabel.setText("GAddressBar")
+        lIcon = QPushButton()
+        lIcon.setObjectName("icon")
+        lIcon.setText("icon")
         
-        lMainLayout = QVBoxLayout()
-        lMainLayout.addWidget(lLabel)
+        lAddress = QLineEdit()
+        lApp.address = lAddress
+        lAddress.setObjectName("edit")
+        
+        lGoTo = QPushButton()
+        lGoTo.setObjectName("goto")
+        lGoTo.setText("goto")
+        
+        lMainLayout = QHBoxLayout()
+        lMainLayout.addWidget(lIcon)
+        lMainLayout.addWidget(lAddress)
+        lMainLayout.addWidget(lGoTo)
         lMainLayout.setContentsMargins(0, 0, 0, 0)
         lMainLayout.setSpacing(0)
         

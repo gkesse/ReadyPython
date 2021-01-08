@@ -11,8 +11,14 @@ class GWindow(GWidget):
         
         lTitleBar = GWidget.Create("titlebar")
         lAddressBar = GWidget.Create("addressbar")
+        
         lAddressKey = GWidget.Create("addresskey")
+        lApp.address_key = lAddressKey
+        
         lWorkspace = QStackedWidget()
+        lApp.page_map = lWorkspace
+        
+        self.addPage("home", "Accueil", GWidget.Create("home"), 1)
         
         lMainLayout = QVBoxLayout()
         lMainLayout.addWidget(lTitleBar)
@@ -23,6 +29,14 @@ class GWindow(GWidget):
         lMainLayout.setSpacing(0)
         
         self.setLayout(lMainLayout)        
+    #================================================
+    def addPage(self, key, title, widget, isDefault):
+        lApp = GManager.Instance().getData().app
+        lWidgetId = lApp.page_map.count()
+        lApp.page_id[key] = lWidgetId
+        lApp.title_map[key] = title
+        lApp.page_map.addWidget(widget)
+        if isDefault == 1: GManager.Instance().setPage(key)
 #================================================
 from .GManager import GManager
 #================================================

@@ -20,8 +20,11 @@ class GWidget(QFrame):
         # default
         return GWidget()
     #================================================
-    def run(self):
-        print("GWidget")
+    # method
+    #================================================
+    def addPage(self, key, title, widget, isDefault): pass
+    def loadPage(self): pass
+    def setContent(self, text): pass
 #================================================
 # widget
 from .GTitleBar import GTitleBar

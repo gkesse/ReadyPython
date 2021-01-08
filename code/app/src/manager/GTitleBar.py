@@ -18,8 +18,9 @@ class GTitleBar(GWidget):
         lAppName.setText(lApp.app_name)
         
         lTitle = QLabel()
+        lApp.title = lTitle
         lTitle.setObjectName("title")
-        lTitle.setText(lApp.title)
+        lTitle.setText(lApp.app_name)
         
         lLogin = QPushButton()
         lLogin.setObjectName("login")
