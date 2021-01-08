@@ -61,7 +61,7 @@ class GSQLiteUi:
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_SQLITE_ID")
-        lAnswer = raw_input("PYTHON_SQLITE (%s) ? " % (lLast))
+        lAnswer = input("PYTHON_SQLITE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -75,7 +75,7 @@ class GSQLiteUi:
     #================================================
     def run_CONFIG_DATA_DELETE_KEY_NAME(self):
         lLast = GConfig.Instance().getData("G_KEY_NAME")
-        lAnswer = raw_input("G_KEY_NAME (%s) ? " % (lLast))
+        lAnswer = input("G_KEY_NAME (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -136,7 +136,7 @@ class GSQLiteUi:
     #================================================
     def run_QUIT(self):
         sys.stdout.write("\n")
-        lAnswer = raw_input("PYTHON_QUIT (Oui/[N]on) ? ")
+        lAnswer = input("PYTHON_QUIT (Oui/[N]on) ? ")
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"

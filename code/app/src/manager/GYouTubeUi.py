@@ -56,7 +56,7 @@ class GYouTubeUi:
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_YOUTUBE_ID")
-        lAnswer = raw_input("PYTHON_YOUTUBE (%s) ? " % (lLast))
+        lAnswer = input("PYTHON_YOUTUBE (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -68,7 +68,7 @@ class GYouTubeUi:
     #================================================
     def run_VIDEO_INFO_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
+        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -84,7 +84,7 @@ class GYouTubeUi:
     #================================================
     def run_VIDEO_LOAD_VIDEO_URL(self):
         lLast = GConfig.Instance().getData("G_VIDEO_URL")
-        lAnswer = raw_input("G_VIDEO_URL (%s) ? " % (lLast))
+        lAnswer = input("G_VIDEO_URL (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
@@ -110,7 +110,7 @@ class GYouTubeUi:
     #================================================
     def run_QUIT(self):
         sys.stdout.write("\n")
-        lAnswer = raw_input("PYTHON_QUIT (Oui/[N]on) ? ")
+        lAnswer = input("PYTHON_QUIT (Oui/[N]on) ? ")
         if lAnswer == "-q" : self.G_STATE = "S_END"
         elif lAnswer == "-i" : self.G_STATE = "S_INIT"
         elif lAnswer == "-a" : self.G_STATE = "S_ADMIN"

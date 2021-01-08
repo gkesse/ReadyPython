@@ -44,7 +44,7 @@ class GProcessUi:
     #================================================
     def run_CHOICE(self):
         lLast = GConfig.Instance().getData("G_ADMIN_ID")
-        lAnswer = raw_input("PYTHON_ADMIN (%s) ? " % (lLast))
+        lAnswer = input("PYTHON_ADMIN (%s) ? " % (lLast))
         if lAnswer == "" : lAnswer = lLast
         if lAnswer == "-q" : self.G_STATE = "S_END"
         #
