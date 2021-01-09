@@ -19,6 +19,10 @@ class GWindow(GWidget):
         lApp.page_map = lWorkspace
         
         self.addPage("home", "Accueil", GWidget.Create("home"), 1)
+        self.addPage("home/login", "Connexion", GWidget.Create("login"))
+        self.addPage("home/sqlite", "SQLite", GWidget.Create("sqlite"))
+        self.addPage("home/opencv", "OpenCV", GWidget.Create("opencv"))
+        self.addPage("home/debug", "Debug", GWidget.Create("debug"))
         
         lMainLayout = QVBoxLayout()
         lMainLayout.addWidget(lTitleBar)
@@ -30,7 +34,7 @@ class GWindow(GWidget):
         
         self.setLayout(lMainLayout)        
     #================================================
-    def addPage(self, key, title, widget, isDefault):
+    def addPage(self, key, title, widget, isDefault = 0):
         lApp = GManager.Instance().getData().app
         lWidgetId = lApp.page_map.count()
         lApp.page_id[key] = lWidgetId

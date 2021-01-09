@@ -112,4 +112,8 @@ class sGApp:
     address_new = None
     # qta
     qta = None
+    # widget
+    widget_id = None
+    # debug
+    debug = None
 #================================================

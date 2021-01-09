@@ -16,6 +16,7 @@ class GAddressKey(GWidget):
                 
         lMainLayout = QHBoxLayout()
         self.m_mainLayout = lMainLayout
+        lMainLayout.setAlignment(Qt.AlignLeft)
         lMainLayout.setContentsMargins(0, 0, 0, 0)
         lMainLayout.setSpacing(0)
         
@@ -35,7 +36,7 @@ class GAddressKey(GWidget):
             if i != 0:
                 lSep = QPushButton()
                 lSep.setObjectName("sep")
-                lSep.setIcon(lApp.qta.icon("fa5.flag"))
+                lSep.setIcon(lApp.qta.icon("fa.chevron-right"))
                 self.m_mainLayout.addWidget(lSep)
             
             if i != 0: lKey += "/"
@@ -47,6 +48,14 @@ class GAddressKey(GWidget):
             lButton.setCursor(QCursor(Qt.PointingHandCursor))
             self.m_widgetId[lButton] = lKey
             self.m_mainLayout.addWidget(lButton)
+            lButton.clicked.connect(self.slotItemClick)
+    #================================================
+    # callback
+    #================================================
+    def slotItemClick(self):
+        lWidget = self.sender()
+        lWidgetId = self.m_widgetId[lWidget]
+        GManager.Instance().setPage(lWidgetId);
 #================================================
 from .GManager import GManager
 #================================================
