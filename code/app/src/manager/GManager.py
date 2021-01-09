@@ -2,6 +2,10 @@
 import os
 import qtawesome
 #================================================
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+#================================================
 class GManager:
     #================================================
     m_instance = None
@@ -22,6 +26,7 @@ class GManager:
         self.mgr.app.address_url = "home"
         self.mgr.app.address_new = self.mgr.app.address_url
         self.mgr.app.qta = qtawesome
+        self.mgr.app.style_path = self.getEnv("GSTYLE_PATH")
     #================================================
     @staticmethod 
     def Instance():
@@ -82,6 +87,12 @@ class GManager:
                 if lWidget != 0: 
                     layout.removeWidget(lWidget)
                     lWidget.setParent(None)
+    #================================================
+    # style
+    #================================================
+    def loadStyle(self):
+        lStyleSheet = open(self.mgr.app.style_path).read()
+        self.mgr.app.qapp.setStyleSheet(lStyleSheet)
 #================================================
 # struct
 #================================================
@@ -90,6 +101,7 @@ class sGManager:
 #================================================
 class sGApp:
     # app
+    qapp = None
     app_name = None
     # title
     title = None
@@ -116,4 +128,6 @@ class sGApp:
     widget_id = None
     # debug
     debug = None
+    # style
+    style_path = None
 #================================================

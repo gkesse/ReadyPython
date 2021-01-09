@@ -16,7 +16,10 @@ class GQt:
         return GQt.m_instance
     #================================================
     def run(self):
+        lApp = GManager.Instance().getData().app
         app = QApplication(sys.argv)
+        lApp.qapp = app;
+        GManager.Instance().loadStyle()
         lWindow = GWidget.Create("window")
         lWindow.show()
         app.exec_()

@@ -21,6 +21,9 @@ class GWidget(QFrame):
         # page
         if key == "window" : return GWindow()
         if key == "home" : return GHome()
+        if key == "login" : return GLogin()
+        if key == "sqlite" : return GSQLiteQt()
+        if key == "opencv" : return GOpenCVQt()
         if key == "debug" : return GDebug()
         # default
         return GWidget()
@@ -44,5 +47,8 @@ from .GListBox import GListBox
 # page
 from .GWindow import GWindow
 from .GHome import GHome
+from .GLogin import GLogin
+from .GSQLiteQt import GSQLiteQt
+from .GOpenCVQt import GOpenCVQt
 from .GDebug import GDebug
 #================================================
