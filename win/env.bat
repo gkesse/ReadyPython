@@ -12,6 +12,7 @@ set "GDATA_PATH=%GPROJECT_PATH%\data"
 set "GSQLITE_DB_PATH=%GDATA_PATH%\sqlite\config.dat"
 set "GVIDEO_PATH=%GDATA_PATH%\video"
 set "GSTYLE_PATH=%GDATA_PATH%\css\style.css"
+set "GFONT_PATH=%GDATA_PATH%\font"
 ::===============================================
 set "GGIT_URL=https://github.com/gkesse/ReadyPython.git"
 set "GGIT_NAME=ReadyPython"

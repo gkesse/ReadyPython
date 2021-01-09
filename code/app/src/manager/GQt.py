@@ -20,6 +20,7 @@ class GQt:
         app = QApplication(sys.argv)
         lApp.qapp = app;
         GManager.Instance().loadStyle()
+        GManager.Instance().loadFont()
         lWindow = GWidget.Create("window")
         lWindow.show()
         app.exec_()

@@ -27,6 +27,7 @@ class GManager:
         self.mgr.app.address_new = self.mgr.app.address_url
         self.mgr.app.qta = qtawesome
         self.mgr.app.style_path = self.getEnv("GSTYLE_PATH")
+        self.mgr.app.font_path = self.getEnv("GFONT_PATH")
     #================================================
     @staticmethod 
     def Instance():
@@ -93,6 +94,14 @@ class GManager:
     def loadStyle(self):
         lStyleSheet = open(self.mgr.app.style_path).read()
         self.mgr.app.qapp.setStyleSheet(lStyleSheet)
+    #================================================
+    # font
+    #================================================
+    def loadFont(self):
+        for lPath, lSubDirs, lFiles in os.walk(self.mgr.app.font_path):
+            for lName in lFiles:
+                lFile = os.path.join(lPath, lName)
+                QFontDatabase.addApplicationFont(lFile);
 #================================================
 # struct
 #================================================
@@ -130,4 +139,6 @@ class sGApp:
     debug = None
     # style
     style_path = None
+    # font
+    font_path = None
 #================================================
