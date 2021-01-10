@@ -1,5 +1,7 @@
 #================================================
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 #================================================
 from .GWidget import GWidget
 #================================================
@@ -14,7 +16,7 @@ class GTitleBar(GWidget):
         
         lLogo = QPushButton()
         lLogo.setObjectName("logo")
-        lLogo.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lLogo.setIcon(QIcon(lApp.img_map["logo.png"]))
         self.m_widgetId[lLogo] = "logo"
         
         lAppName = QPushButton()
@@ -30,27 +32,32 @@ class GTitleBar(GWidget):
         
         lLogin = QPushButton()
         lLogin.setObjectName("login")
-        lLogin.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lLogin.setIcon(lApp.qta.icon("fa5s.user", color=lApp.qta_color))
+        lTitle.setText("Se Connecter")
         self.m_widgetId[lLogin] = "login"
 
         lFullscreen = QPushButton()
         lFullscreen.setObjectName("fullscreen")
-        lFullscreen.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lFullscreen.setIcon(lApp.qta.icon("fa5s.expand", color=lApp.qta_color))
+        lFullscreen.setIconSize(QSize(lApp.qta_size, lApp.qta_size))
         self.m_widgetId[lFullscreen] = "fullscreen"
 
         lMinimize = QPushButton()
         lMinimize.setObjectName("minimize")
-        lMinimize.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lMinimize.setIcon(lApp.qta.icon("fa5s.window-minimize", color=lApp.qta_color))
+        lMinimize.setIconSize(QSize(lApp.qta_size, lApp.qta_size))
         self.m_widgetId[lMinimize] = "minimize"
 
         lMaximize = QPushButton()
         lMaximize.setObjectName("maximize")
-        lMaximize.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lMaximize.setIcon(lApp.qta.icon("fa5s.window-maximize", color=lApp.qta_color))
+        lMaximize.setIconSize(QSize(lApp.qta_size, lApp.qta_size))
         self.m_widgetId[lMaximize] = "maximize"
 
         lClose = QPushButton()
         lClose.setObjectName("close")
-        lClose.setIcon(lApp.qta.icon("fa.times", color=lApp.qta_color))
+        lClose.setIcon(lApp.qta.icon("fa5s.times", color=lApp.qta_color))
+        lClose.setIconSize(QSize(lApp.qta_size, lApp.qta_size))
         self.m_widgetId[lClose] = "close"
         
         lMainLayout = QHBoxLayout()

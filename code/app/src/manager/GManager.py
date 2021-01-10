@@ -27,9 +27,11 @@ class GManager:
         self.mgr.app.address_new = self.mgr.app.address_url
         self.mgr.app.qta = qtawesome
         self.mgr.app.qta_color = "#ffffff"
+        self.mgr.app.qta_size = 16
         self.mgr.app.style_path = self.getEnv("GSTYLE_PATH")
         self.mgr.app.font_path = self.getEnv("GFONT_PATH")
         self.mgr.app.img_path = self.getEnv("GIMG_PATH")
+        self.mgr.app.img_map = {}
     #================================================
     @staticmethod 
     def Instance():
@@ -111,7 +113,8 @@ class GManager:
         for lPath, lSubDirs, lFiles in os.walk(self.mgr.app.img_path):
             for lName in lFiles:
                 lFile = os.path.join(lPath, lName)
-                print(lFile)
+                lKey = QFileInfo(lFile).fileName()
+                self.mgr.app.img_map[lKey] = lFile
 #================================================
 # struct
 #================================================
@@ -144,6 +147,7 @@ class sGApp:
     # qta
     qta = None
     qta_color = None
+    qta_size = None
     # widget
     widget_id = None
     # debug
@@ -154,4 +158,5 @@ class sGApp:
     font_path = None
     # img
     img_path = None
+    img_map = None
 #================================================

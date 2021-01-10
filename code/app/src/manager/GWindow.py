@@ -7,6 +7,7 @@ class GWindow(GWidget):
     #================================================
     def __init__(self): 
         super().__init__()
+        self.setObjectName("GWindow")
         lApp = GManager.Instance().getData().app
         
         lTitleBar = GWidget.Create("titlebar")
@@ -30,7 +31,7 @@ class GWindow(GWidget):
         lMainLayout.addWidget(lAddressKey)
         lMainLayout.addWidget(lWorkspace, 1)
         lMainLayout.setContentsMargins(0, 0, 0, 0)
-        lMainLayout.setSpacing(0)
+        lMainLayout.setSpacing(10)
         
         self.setLayout(lMainLayout)        
     #================================================
