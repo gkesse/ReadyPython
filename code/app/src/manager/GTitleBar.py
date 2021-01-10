@@ -40,7 +40,7 @@ class GTitleBar(GWidget):
 
         lClose = QPushButton()
         lClose.setObjectName("close")
-        lClose.setIcon(lApp.qta.icon("fa.times"))
+        lClose.setIcon(lApp.qta.icon("fa.times", color='red'))
         
         lMainLayout = QHBoxLayout()
         lMainLayout.addWidget(lLogo)
