@@ -1,5 +1,7 @@
 #================================================
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 #================================================
 from .GWidget import GWidget
 #================================================
@@ -33,7 +35,10 @@ class GWindow(GWidget):
         lMainLayout.setContentsMargins(0, 0, 0, 0)
         lMainLayout.setSpacing(10)
         
-        self.setLayout(lMainLayout)        
+        self.setLayout(lMainLayout)
+        
+        self.setWindowIcon(QIcon(lApp.img_map["logo.png"]))
+        self.setWindowTitle(lApp.app_name)
     #================================================
     def addPage(self, key, title, widget, isDefault = 0):
         lApp = GManager.Instance().getData().app

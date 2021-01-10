@@ -88,6 +88,21 @@ class GTitleBar(GWidget):
         lMainLayout.setSpacing(5)
         
         self.setLayout(lMainLayout)
+        
+        lLogo.clicked.connect(self.slotItemClick)
+        lAppName.clicked.connect(self.slotItemClick)
+        lLogin.clicked.connect(self.slotItemClick)
+        lFullscreen.clicked.connect(self.slotItemClick)
+        lMinimize.clicked.connect(self.slotItemClick)
+        lMaximize.clicked.connect(self.slotItemClick)
+        lClose.clicked.connect(self.slotItemClick)
+    #================================================
+    # callback
+    #================================================
+    def slotItemClick(self):
+        lWidget = self.sender()
+        lWidgetId = self.m_widgetId[lWidget]
+        print(lWidgetId);
 #================================================
 from .GManager import GManager
 #================================================
