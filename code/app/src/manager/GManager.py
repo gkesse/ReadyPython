@@ -26,8 +26,10 @@ class GManager:
         self.mgr.app.address_url = "home"
         self.mgr.app.address_new = self.mgr.app.address_url
         self.mgr.app.qta = qtawesome
+        self.mgr.app.qta_color = "#ffffff"
         self.mgr.app.style_path = self.getEnv("GSTYLE_PATH")
         self.mgr.app.font_path = self.getEnv("GFONT_PATH")
+        self.mgr.app.img_path = self.getEnv("GIMG_PATH")
     #================================================
     @staticmethod 
     def Instance():
@@ -101,7 +103,15 @@ class GManager:
         for lPath, lSubDirs, lFiles in os.walk(self.mgr.app.font_path):
             for lName in lFiles:
                 lFile = os.path.join(lPath, lName)
-                QFontDatabase.addApplicationFont(lFile);
+                QFontDatabase.addApplicationFont(lFile)
+    #================================================
+    # img
+    #================================================
+    def loadImg(self):
+        for lPath, lSubDirs, lFiles in os.walk(self.mgr.app.img_path):
+            for lName in lFiles:
+                lFile = os.path.join(lPath, lName)
+                print(lFile)
 #================================================
 # struct
 #================================================
@@ -133,6 +143,7 @@ class sGApp:
     address_new = None
     # qta
     qta = None
+    qta_color = None
     # widget
     widget_id = None
     # debug
@@ -141,4 +152,6 @@ class sGApp:
     style_path = None
     # font
     font_path = None
+    # img
+    img_path = None
 #================================================

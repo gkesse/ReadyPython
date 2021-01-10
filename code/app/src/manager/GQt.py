@@ -19,8 +19,9 @@ class GQt:
         lApp = GManager.Instance().getData().app
         app = QApplication(sys.argv)
         lApp.qapp = app;
-        GManager.Instance().loadStyle()
         GManager.Instance().loadFont()
+        GManager.Instance().loadImg()
+        GManager.Instance().loadStyle()
         lWindow = GWidget.Create("window")
         lWindow.show()
         app.exec_()
