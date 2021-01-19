@@ -36,7 +36,7 @@ class GAddressKey(GWidget):
             if i != 0:
                 lSep = QPushButton()
                 lSep.setObjectName("sep")
-                lSep.setIcon(lApp.qta.icon("fa.chevron-right"))
+                lSep.setIcon(lApp.qta.icon("fa.chevron-right", color=lApp.qta_color))
                 self.m_mainLayout.addWidget(lSep)
             
             if i != 0: lKey += "/"

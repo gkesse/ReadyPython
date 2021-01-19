@@ -5,7 +5,7 @@ set "PATH=C:\Users\Admin\AppData\Local\Programs\Python\Python39;%PATH%"
 ::===============================================
 set "GPROJECT_ROOT=C:\Users\Admin\Downloads\Programs"
 set "GPROJECT_PATH=%GPROJECT_ROOT%\ReadyPython"
-set "GPROJECT_SRC=%GPROJECT_PATH%\code\app\src"
+set "GPROJECT_SRC=%GPROJECT_PATH%\app\code\readyapp\src"
 ::===============================================
 set "GSEPARATOR=\"
 set "GDATA_PATH=%GPROJECT_PATH%\data"

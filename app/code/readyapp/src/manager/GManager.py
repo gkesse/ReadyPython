@@ -32,6 +32,8 @@ class GManager:
         self.mgr.app.font_path = self.getEnv("GFONT_PATH")
         self.mgr.app.img_path = self.getEnv("GIMG_PATH")
         self.mgr.app.img_map = {}
+        self.mgr.app.win_width = 600
+        self.mgr.app.win_height = 330
     #================================================
     @staticmethod 
     def Instance():
@@ -159,4 +161,8 @@ class sGApp:
     # img
     img_path = None
     img_map = None
+    # win
+    win = None
+    win_width = None
+    win_height = None
 #================================================

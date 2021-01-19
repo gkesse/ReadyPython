@@ -8,6 +8,8 @@ from .GWidget import GWidget
 class GTitleBar(GWidget):
     #================================================
     m_widgetId = {}
+    m_pressPos = None
+    m_pressFlag = None
     #================================================
     def __init__(self):
         super().__init__()
@@ -100,9 +102,29 @@ class GTitleBar(GWidget):
     # callback
     #================================================
     def slotItemClick(self):
+        lApp = GManager.Instance().getData().app
         lWidget = self.sender()
         lWidgetId = self.m_widgetId[lWidget]
-        print(lWidgetId);
+        # close
+        if lWidgetId == "close":
+            lApp.win.close()
+    #================================================
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.setCursor(QCursor(Qt.SizeAllCursor))
+            self.m_pressPos = event.pos()
+            self.m_pressFlag = True
+    #================================================
+    def mouseReleaseEvent(self, event):
+        self.setCursor(QCursor(Qt.ArrowCursor))
+        self.m_pressFlag = False
+    #================================================
+    def mouseMoveEvent(self, event):
+        lApp = GManager.Instance().getData().app
+        if self.m_pressFlag == True:
+            lGlobalPos = event.globalPos()
+            lDiffPos = lGlobalPos - self.m_pressPos
+            lApp.win.move(lDiffPos)
 #================================================
 from .GManager import GManager
 #================================================

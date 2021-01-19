@@ -11,6 +11,7 @@ class GWindow(GWidget):
         super().__init__()
         self.setObjectName("GWindow")
         lApp = GManager.Instance().getData().app
+        lApp.win = self
         
         lTitleBar = GWidget.Create("titlebar")
         lAddressBar = GWidget.Create("addressbar")
@@ -19,6 +20,7 @@ class GWindow(GWidget):
         lApp.address_key = lAddressKey
         
         lWorkspace = QStackedWidget()
+        lWorkspace.setObjectName("workspace")
         lApp.page_map = lWorkspace
         
         self.addPage("home", "Accueil", GWidget.Create("home"), 1)
@@ -37,8 +39,10 @@ class GWindow(GWidget):
         
         self.setLayout(lMainLayout)
         
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         self.setWindowIcon(QIcon(lApp.img_map["logo.png"]))
         self.setWindowTitle(lApp.app_name)
+        self.resize(lApp.win_width, lApp.win_height)
     #================================================
     def addPage(self, key, title, widget, isDefault = 0):
         lApp = GManager.Instance().getData().app
